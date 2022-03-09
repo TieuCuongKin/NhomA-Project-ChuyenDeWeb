@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+Route::post('/login', function () {
+    return view('test');
+})->middleware('checkuser');;
 
 Route::get('/demo/{age}', function ($age) {
     return view('test');
 })->middleware('checkage');
+
+Route::get('/user/{name}/{pass}', function ($name, $pass) {
+    return view('test');
+})->middleware('checkuser');
