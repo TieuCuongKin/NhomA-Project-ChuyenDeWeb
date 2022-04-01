@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\MyController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [MyController::class, 'index']);
 
-Route::post('/login', function () {
-    return view('test');
-})->middleware('checkuser');;
-
-Route::get('/demo/{age}', function ($age) {
-    return view('test');
-})->middleware('checkage');
-
-Route::get('/user/{name}/{pass}', function ($name, $pass) {
-    return view('test');
-})->middleware('checkuser');
+Route::resource('/product', ProductController::class); 
+//Route::resource('/product', ProductController::class, [only (cho phép hoặc excpet loại trừ)] => ['index', 'show' (các phương thức hạn chế)]);
+/*
+Route::get('/product', [ProductController::class]); //index
+Route::get('/product/create', [ProductController::class]); //create
+Route::post('/product', [ProductController::class]); //store
+Route::get('/product/{id}', [ProductController::class]); //show
+Route::get('/product/{id}/edit', [ProductController::class]); //edit
+Route::patch('/product/{id}', [ProductController::class]); //update
+Route::put('/product/{id}', [ProductController::class]); //update
+Route::delete('/product/{id}', [ProductController::class]); //destroy
+*/

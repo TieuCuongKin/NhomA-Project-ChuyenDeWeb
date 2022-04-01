@@ -16,9 +16,9 @@ class CheckUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->name === 'admin' && $request->pass === '123') {         
+        if ($request->name === 'admin' && $request->pass === '123') {
             return $next($request);
         }
-        return redirect('/');     
+        return redirect('/');
     }
 }
