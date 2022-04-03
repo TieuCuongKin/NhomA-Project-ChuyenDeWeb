@@ -65,7 +65,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
+							<a href="{{ url('/') }}" class="logo">
 								<img src="./img/logo.png" alt="">
 							</a>
 						</div>
@@ -75,7 +75,7 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form method="GET" action="{{ url('/store') }}">
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									<option value="1">Category 01</option>
@@ -112,7 +112,7 @@
 									<div class="cart-list">
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="./img/product01.png" alt="">
+												<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 											</div>
 											<div class="product-body">
 												<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -123,7 +123,7 @@
 
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="./img/product02.png" alt="">
+												<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 											</div>
 											<div class="product-body">
 												<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -138,7 +138,7 @@
 									</div>
 									<div class="cart-btns">
 										<a href="#">View Cart</a>
-										<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="{{ url('/checkout') }}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -173,12 +173,12 @@
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Hot Deals</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Smartphones</a></li>
-					<li><a href="#">Cameras</a></li>
-					<li><a href="#">Accessories</a></li>
+					<li><a href="{{ url('/store') }}">Hot Deals</a></li>
+					<li><a href="{{ url('/store') }}">Categories</a></li>
+					<li><a href="{{ url('/store') }}">Laptops</a></li>
+					<li><a href="{{ url('/store') }}">Smartphones</a></li>
+					<li><a href="{{ url('/store') }}">Cameras</a></li>
+					<li><a href="{{ url('/store') }}">Accessories</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -250,11 +250,11 @@
 						<div class="footer">
 							<h3 class="footer-title">Categories</h3>
 							<ul class="footer-links">
-								<li><a href="#">Hot deals</a></li>
-								<li><a href="#">Laptops</a></li>
-								<li><a href="#">Smartphones</a></li>
-								<li><a href="#">Cameras</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li><a href="{{ url('/store') }}">Hot deals</a></li>
+								<li><a href="{{ url('/store') }}">Laptops</a></li>
+								<li><a href="{{ url('/store') }}">Smartphones</a></li>
+								<li><a href="{{ url('/store') }}">Cameras</a></li>
+								<li><a href="{{ url('/store') }}">Accessories</a></li>
 							</ul>
 						</div>
 					</div>

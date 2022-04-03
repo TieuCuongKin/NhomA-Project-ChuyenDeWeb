@@ -15,7 +15,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>Laptop<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="{{ url('/store') }}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -29,7 +29,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>Accessories<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="{{ url('/store') }}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>Cameras<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="{{ url('/store') }}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product01.png" alt="" href="{{ url('blank')}}">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="sale">-30%</span>
 												<span class="new">NEW</span>
@@ -112,7 +112,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -120,7 +122,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product02.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="new">NEW</span>
 											</div>
@@ -143,7 +145,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -151,7 +155,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product03.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="sale">-30%</span>
 											</div>
@@ -169,7 +173,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -177,7 +183,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product04.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/64gb.jpeg') }}" alt=""></a>	
 										</div>
 										<div class="product-body">
 											<p class="product-category">Category</p>
@@ -197,7 +203,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -205,11 +213,11 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product05.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 										</div>
 										<div class="product-body">
 											<p class="product-category">Category</p>
-											<h3 class="product-name"><a href="#">product name goes here</a></h3>
+											<h3 class="product-name"><a href="{{ url('/product') }}">product name goes here</a></h3>
 											<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i>
@@ -225,7 +233,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -323,7 +333,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product06.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="sale">-30%</span>
 												<span class="new">NEW</span>
@@ -347,7 +357,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -355,7 +367,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product07.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="new">NEW</span>
 											</div>
@@ -378,7 +390,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -386,7 +400,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product08.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 											<div class="product-label">
 												<span class="sale">-30%</span>
 											</div>
@@ -404,7 +418,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -412,7 +428,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product09.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/64gb.jpeg') }}" alt=""></a>	
 										</div>
 										<div class="product-body">
 											<p class="product-category">Category</p>
@@ -440,7 +456,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="./img/product01.png" alt="">
+											<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 										</div>
 										<div class="product-body">
 											<p class="product-category">Category</p>
@@ -460,7 +476,9 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href="{{ url('/checkout') }}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</a>
 										</div>
 									</div>
 									<!-- /product -->
@@ -498,7 +516,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product07.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -511,7 +529,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product08.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -524,7 +542,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product09.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -539,7 +557,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product01.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -552,7 +570,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product02.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -565,7 +583,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product03.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -591,7 +609,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product04.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -604,7 +622,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product05.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -617,7 +635,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product06.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -632,7 +650,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product07.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -645,7 +663,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product08.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -658,7 +676,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product09.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -686,7 +704,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product01.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -699,7 +717,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product02.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -712,7 +730,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product03.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -727,7 +745,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product04.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -740,7 +758,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product05.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -753,7 +771,7 @@
 							<!-- product widget -->
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product06.png" alt="">
+									<a href="{{ url('/product') }}"><img src="{{ asset('img/32gb.jpeg') }}" alt=""></a>	
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>

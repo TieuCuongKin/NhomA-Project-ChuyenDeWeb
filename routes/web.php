@@ -18,7 +18,15 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', [MyController::class, 'index']);
 
-Route::resource('/product', ProductController::class); 
+Route::get('/blank', [MyController::class, 'blank']);
+
+Route::get('/checkout', [MyController::class, 'checkout']);
+
+Route::get('/store', [MyController::class, 'store']);
+
+Route::get('/product', [MyController::class, 'product']);
+
+//Route::resource('/product', ProductController::class); 
 //Route::resource('/product', ProductController::class, [only (cho phép hoặc excpet loại trừ)] => ['index', 'show' (các phương thức hạn chế)]);
 /*
 Route::get('/product', [ProductController::class]); //index
