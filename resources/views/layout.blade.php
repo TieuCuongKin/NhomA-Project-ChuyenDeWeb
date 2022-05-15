@@ -49,8 +49,21 @@
 					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+					<?php if ($user != NULL) {
+						if ($user->name == "admin") { ?>
+							<li><a href="{{ url('/admin') }}"><i class="fa fa-user-o"></i>User {{ $user->name }}</a></li>
+						<?php } else { ?>
+							<li><a href="{{ url('/') }}"><i class="fa fa-user-o"></i>User {{ $user->name }}</a></li>
+						<?php } ?>
+						<li>
+							<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" style="text-align: center; color: aliceblue">{{ __('Log Out') }} <i class="fa fa-arrow-circle-right"></i></a>
+							</form>
+						</li>
+					<?php } else { ?>
+						<li><a href="{{ url('/login') }}"><i class="fa fa-user-o"></i>Login</a></li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
@@ -63,10 +76,10 @@
 				<!-- row -->
 				<div class="row">
 					<!-- LOGO -->
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="header-logo">
 							<a href="{{ url('/') }}" class="logo">
-								<img src="./img/logo.png" alt="">
+								<img src="{{ asset('/img/logo.png') }}" alt="">
 							</a>
 						</div>
 					</div>
@@ -75,13 +88,13 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form method="GET" action="{{ url('/store') }}">
-								<select class="input-select">
-									<option value="0">All Categories</option>
-									<option value="1">Category 01</option>
-									<option value="1">Category 02</option>
+							<form method="GET" action="{{ url('/search') }}">
+								<select class="input-select" name="option">
+									<option value="description">Description </option>
+									<option value="product_name">Product name</option>
+									<option value="manu_name">Manufacturers</option>
 								</select>
-								<input class="input" placeholder="Search here">
+								<input name="key" class="input" placeholder="Search here">
 								<button class="search-btn">Search</button>
 							</form>
 						</div>
@@ -89,55 +102,84 @@
 					<!-- /SEARCH BAR -->
 
 					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
+					<div class="col-md-4 clearfix">
 						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#">
-									<i class="fa fa-heart-o"></i>
-									<span>Your Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
+							<?php if ($user != NULL) { ?>
+								<!-- Wishlist -->
+								<div>
+									<a href="{{ url('/search?option=wishlist') }}">
+										<i class="fa fa-heart-o"></i>
+										<span>Your Wishlist</span>
+										<div class="qty">
+											{{ count($allothers); }}
+										</div>
+									</a>
+								</div>
+								<!-- /Wishlist -->
+
+								<!-- PayMents -->
+								<div class="dropdown">
+									<a href="{{ url('/payments') }}">
+										<i class="fa fa-heart-o"></i>
+										<span>Payments</span>
+										<div class="qty">
+											{{ count($allpayments); }}
+										</div>
+									</a>
+								</div>
+								<!-- /PayMents -->
+							<?php } ?>
 
 							<!-- Cart -->
 							<div class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
 									<span>Your Cart</span>
-									<div class="qty">3</div>
+									<div class="qty">
+										<?php
+										$total = 0;
+										foreach ($allproducts as $value) {
+											if (session()->has('carts' . $value->product_id)) {
+												$total++;
+											}
+										}
+										echo $total; ?>
+									</div>
 								</a>
 								<div class="cart-dropdown">
 									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<a href="{{ url('/product') }}"><img src="{{ asset('img/4gb.jpeg') }}" alt=""></a>	
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<a href="{{ url('/product') }}"><img src="{{ asset('img/8gb.jpeg') }}" alt=""></a>	
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
+										<?php $sum = 0;
+										foreach ($allproducts as $value) {
+											if (session()->has('carts' . $value->product_id)) { ?>
+												<div class="product-widget">
+													<div class="product-img">
+														<a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
+													</div>
+													<div class="product-body">
+														<h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">{{ $value->product_name }}</a></h3>
+														<h4 class="product-price"><span class="qty">{{ session()->get('carts' . $value->product_id) }} x</span>
+															<?php if ($value->sale > 0) {
+																$sum += ($value->price - ($value->price * $value->sale / 100)) * session()->get('carts' . $value->product_id);
+																echo number_format($value->price - ($value->price * $value->sale / 100)) . "đ ";
+															} else {
+																$sum += $value->price * session()->get('carts' . $value->product_id);
+																echo number_format($value->price) . "đ";
+															} ?>
+														</h4>
+													</div>
+													<a href="{{ url('/carts/delete/'.$value->product_id) }}" class="delete">
+														<i class="fa fa-close"></i>
+													</a>
+												</div>
+										<?php }
+										} ?>
 									</div>
 									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
+										<small>{{ $total }} Item(s) selected</small>
+										<h5>SUBTOTAL: {{ number_format($sum) . "đ" }}</h5>
 									</div>
 									<div class="cart-btns">
-										<a href="#">View Cart</a>
+										<a href="{{ url('/carts') }}">View Cart</a>
 										<a href="{{ url('/checkout') }}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -172,13 +214,11 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="{{ url('/store') }}">Hot Deals</a></li>
-					<li><a href="{{ url('/store') }}">Categories</a></li>
-					<li><a href="{{ url('/store') }}">Laptops</a></li>
-					<li><a href="{{ url('/store') }}">Smartphones</a></li>
-					<li><a href="{{ url('/store') }}">Cameras</a></li>
-					<li><a href="{{ url('/store') }}">Accessories</a></li>
+					<li class="active"><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/search?option=alls') }}">Alls</a></li>
+					@foreach($allmanus as $value)
+					<li><a href="{{ url('/search?option=manu_name&key='.$value->manu_name) }}">{{ $value->manu_name }}</a></li>
+					@endforeach
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -199,8 +239,8 @@
 				<div class="col-md-12">
 					<div class="newsletter">
 						<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-						<form>
-							<input class="input" type="email" placeholder="Enter Your Email">
+						<form action="{{ url('/mail') }}" method="GET">
+							<input class="input" name="mail" type="email" placeholder="Enter Your Email">
 							<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
 						</form>
 						<ul class="newsletter-follow">
@@ -250,11 +290,9 @@
 						<div class="footer">
 							<h3 class="footer-title">Categories</h3>
 							<ul class="footer-links">
-								<li><a href="{{ url('/store') }}">Hot deals</a></li>
-								<li><a href="{{ url('/store') }}">Laptops</a></li>
-								<li><a href="{{ url('/store') }}">Smartphones</a></li>
-								<li><a href="{{ url('/store') }}">Cameras</a></li>
-								<li><a href="{{ url('/store') }}">Accessories</a></li>
+								@foreach($allmanus as $value)
+								<li><a href="{{ url('/store/'.$value->manu_id) }}">{{ $value->manu_name }}</a></li>
+								@endforeach
 							</ul>
 						</div>
 					</div>

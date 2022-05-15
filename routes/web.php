@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\DetailsController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\MyController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ManufacturersController;
+use App\Http\Controllers\OthersController;
+use App\Http\Controllers\PaymentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +19,27 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/{name?}', [MyController::class, 'index']);
+require __DIR__ . '/auth.php';
 
+Route::middleware(['auth'])->group(function () {
+    // Admin
+    Route::get('/admin', [MyController::class, 'admin']);
+    Route::resource('/product', ProductsController::class);
+    Route::resource('/manufacturer', ManufacturersController::class);
+    Route::resource('/payment', PaymentsController::class);
+    Route::resource('/detail', DetailsController::class);
+    Route::resource('/other', OthersController::class);
+});
 
-//Route::resource('/product', ProductController::class); 
-//Route::resource('/product', ProductController::class, [only (cho phép hoặc excpet loại trừ)] => ['index', 'show' (các phương thức hạn chế)]);
-/*
-Route::get('/product', [ProductController::class]); //index
-Route::get('/product/create', [ProductController::class]); //create
-Route::post('/product', [ProductController::class]); //store
-Route::get('/product/{id}', [ProductController::class]); //show
-Route::get('/product/{id}/edit', [ProductController::class]); //edit
-Route::patch('/product/{id}', [ProductController::class]); //update
-Route::put('/product/{id}', [ProductController::class]); //update
-Route::delete('/product/{id}', [ProductController::class]); //destroy
-*/
+Route::get('/mail', [MyController::class, 'mail']); 
+Route::get('/createpayment', [MyController::class, 'createpayment']); 
+Route::get('/payments', [MyController::class, 'payments']); 
+Route::get('/sort/{option}/{key}', [MyController::class, 'sort']); 
+Route::get('/searchoption/{option}/{key?}', [MyController::class, 'searchoption']); 
+Route::get('/search', [MyController::class, 'search']); 
+Route::get('/others/clearcompare', [MyController::class, 'clearcompare']);
+Route::get('/others/{name}/{product_id}/{user_id}/{option?}/{key?}', [MyController::class, 'others'])->name('others');
+Route::get('/carts/{action?}/{product_id?}', [MyController::class, 'carts'])->name('carts');
+Route::get('/star/{manu_id}/{product_id}/{user_id}', [MyController::class, 'star']);
+Route::get('/products/{product_id}/{manu_id}', [MyController::class, 'products'])->name('products');
+Route::get('/{name?}', [MyController::class, 'index'])->name('index');

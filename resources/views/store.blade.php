@@ -238,6 +238,7 @@
 
 						<!-- store products -->
 						<div class="row">
+							
 							<!-- product -->
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
