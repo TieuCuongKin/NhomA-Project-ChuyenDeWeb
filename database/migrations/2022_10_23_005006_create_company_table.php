@@ -21,6 +21,7 @@ class CreateCompanyTable extends Migration
             $table->string('company_contact');
             $table->string('company_website');
             $table->text('description');
+            $table->string('image');
             $table->timestamps();
         });
     }
