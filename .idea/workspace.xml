@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4225708-87f7-4c9c-a2e2-6a94a6e31b16" name="Changes" comment="Setup laravel project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d4225708-87f7-4c9c-a2e2-6a94a6e31b16" name="Changes" comment="Admin view">
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Application/Admin/Providers/AdminServiceProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Application/Admin/Services/AdminService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Domain/Admin/Model/Admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Domain/Admin/Repository/AdminRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Domain/Base/BaseDomainModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Primary/Controllers/Admin/AdminController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Secondary/Database/Base/Admin/Admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Secondary/Database/Base/Admin/AdminRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Secondary/Database/Base/BaseModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Secondary/Database/Base/Traits/FilterTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobSeeker/Port/Secondary/Database/Base/Traits/SearchTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckAuthAdmin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Eloquent/BaseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/EloquentBaseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/AdminService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +76,13 @@
           </list>
         </option>
       </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -166,6 +196,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/laravel/breeze" />
     </include_path>
   </component>
   <component name="ProjectId" id="2FCH1BMwLsolWmmWsV7S6JKFFsl" />
@@ -176,16 +207,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/OpenServer/domains/bachelor-backend",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/OpenServer/domains/bachelor-backend&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -202,6 +233,7 @@
       <workItem from="1665151017734" duration="2207000" />
       <workItem from="1666271742335" duration="3740000" />
       <workItem from="1666484830233" duration="4227000" />
+      <workItem from="1667666874392" duration="58000" />
     </task>
     <task id="LOCAL-00001" summary="hi">
       <created>1665151062658</created>
@@ -242,6 +274,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="prevent init" />
     <MESSAGE value="Setup laravel project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setup laravel project" />
+    <MESSAGE value="Admin view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin view" />
   </component>
 </project>
