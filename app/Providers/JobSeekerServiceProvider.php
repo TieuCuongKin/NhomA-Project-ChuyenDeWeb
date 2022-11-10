@@ -1,12 +1,14 @@
 <?php
 
-namespace Jobseeker\Application\Admin\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use JobSeeker\Domain\Admin\Repository\AdminRepository;
-use JobSeeker\Port\Secondary\Database\Base\Admin\AdminRepositoryInterface;
+use JobSeeker\Domain\User\Repository\UserRepository;
+use JobSeeker\Port\Secondary\Database\Admin\AdminRepositoryInterface;
+use JobSeeker\Port\Secondary\Database\User\UserRepositoryInterface;
 
-class AdminServiceProvider extends ServiceProvider
+class JobSeekerServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -17,6 +19,8 @@ class AdminServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
     }
 
     /**

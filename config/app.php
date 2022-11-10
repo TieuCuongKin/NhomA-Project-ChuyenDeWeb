@@ -178,7 +178,7 @@ return [
         /*
          * JobSeeker Service Providers...
          */
-        JobSeeker\Application\Admin\Providers\AdminServiceProvider::class,
+        App\Providers\JobSeekerServiceProvider::class,
     ],
 
     /*

@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Port\Secondary\Database\Base\Admin;
+namespace JobSeeker\Port\Secondary\Database\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

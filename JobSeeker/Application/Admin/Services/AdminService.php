@@ -2,7 +2,7 @@
 
 namespace JobSeeker\Application\Admin\Services;
 
-use JobSeeker\Port\Secondary\Database\Base\Admin\AdminRepositoryInterface;
+use JobSeeker\Port\Secondary\Database\Admin\AdminRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class AdminService

@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Port\Secondary\Database\Base\Traits;
+namespace JobSeeker\Port\Secondary\Database\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 

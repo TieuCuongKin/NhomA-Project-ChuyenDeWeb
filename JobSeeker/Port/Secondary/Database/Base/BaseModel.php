@@ -3,12 +3,12 @@
 namespace JobSeeker\Port\Secondary\Database\Base;
 
 use JobSeeker\Domain\Base\BaseDomainModel;
-use JobSeeker\Port\Secondary\Database\Base\Traits\FilterTrait;
-use JobSeeker\Port\Secondary\Database\Base\Traits\SearchTrait;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use JobSeeker\Port\Secondary\Database\Traits\FilterTrait;
+use JobSeeker\Port\Secondary\Database\Traits\SearchTrait;
 
 abstract class BaseModel extends Model
 {

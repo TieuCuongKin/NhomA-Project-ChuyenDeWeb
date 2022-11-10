@@ -2,9 +2,9 @@
 
 namespace JobSeeker\Domain\Admin\Repository;
 
-use App\Repositories\EloquentBaseRepository;
-use JobSeeker\Port\Secondary\Database\Base\Admin\Admin;
-use JobSeeker\Port\Secondary\Database\Base\Admin\AdminRepositoryInterface;
+use JobSeeker\Port\Secondary\Database\Admin\Admin;
+use JobSeeker\Port\Secondary\Database\Admin\AdminRepositoryInterface;
+use JobSeeker\Port\Secondary\Database\Base\EloquentBaseRepository;
 
 class AdminRepository extends EloquentBaseRepository implements AdminRepositoryInterface
 {
