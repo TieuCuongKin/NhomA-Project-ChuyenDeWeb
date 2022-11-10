@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 interface UserRepositoryInterface
 {
     /**
-     * Get all groups
+     * Get all user
      *
      * @return Collection
      */
