@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Domain\User\Model;
+namespace JobSeeker\Domain\JobSeekerManagement\User\Model;
 
 use JobSeeker\Domain\Base\BaseDomainModel;
 
@@ -36,6 +36,55 @@ class User extends BaseDomainModel
      */
     private string $password;
 
+
+    /**
+     * @var int
+     */
+    private int $status;
+
+    /**
+     * @var int
+     */
+    private int $user_type_id;
+
+    /**
+     * @var string|null
+     */
+    private ?string $rememberToken;
+
+    /**
+     * @param string $fullName
+     * @param int $gender
+     * @param string $address
+     * @param string $phone
+     * @param string $email
+     * @param string $password
+     * @param int $status
+     * @param int $user_type_id
+     * @param string|null $rememberToken
+     */
+    public function __construct(
+        string $fullName,
+        int $gender,
+        string $address,
+        string $phone,
+        string $email,
+        string $password,
+        int $status,
+        int $user_type_id,
+        ?string $rememberToken
+    ) {
+        $this->fullName = $fullName;
+        $this->gender = $gender;
+        $this->address = $address;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->password = $password;
+        $this->status = $status;
+        $this->user_type_id = $user_type_id;
+        $this->rememberToken = $rememberToken;
+    }
+
     /**
      * @return int
      */
@@ -66,48 +115,6 @@ class User extends BaseDomainModel
     public function setUserTypeId(int $user_type_id): void
     {
         $this->user_type_id = $user_type_id;
-    }
-
-    /**
-     * @var int
-     */
-    private int $status;
-
-    /**
-     * @var int
-     */
-    private int $user_type_id;
-
-    /**
-     * @var string|null
-     */
-    private ?string $rememberToken;
-
-    /**
-     * @param string $fullName
-     * @param int $gender
-     * @param string $address
-     * @param string $phone
-     * @param string $email
-     * @param string $password
-     * @param string|null $rememberToken
-     */
-    public function __construct(
-        string $fullName,
-        int $gender,
-        string $address,
-        string $phone,
-        string $email,
-        string $password,
-        ?string $rememberToken
-    ) {
-        $this->fullName = $fullName;
-        $this->gender = $gender;
-        $this->address = $address;
-        $this->phone = $phone;
-        $this->email = $email;
-        $this->password = $password;
-        $this->rememberToken = $rememberToken;
     }
 
     /**

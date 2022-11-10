@@ -27,7 +27,7 @@ Route::group([
 
 
         Route::prefix('user')->group(function () {
-            Route::get('/list', 'UserController@listUsers')->name('jobseeker.index');
+            Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
             Route::get('view-profile/{userId}', 'UserController@viewProfile');
             Route::post('update-status', 'UserController@updateStatus');
             Route::post('reapprove', 'UserController@reapprove');

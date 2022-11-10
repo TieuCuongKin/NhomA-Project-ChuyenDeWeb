@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Domain\Admin\Model;
+namespace JobSeeker\Domain\MasterManagement\Admin\Model;
 
 use JobSeeker\Domain\Base\BaseDomainModel;
 use Carbon\Carbon;

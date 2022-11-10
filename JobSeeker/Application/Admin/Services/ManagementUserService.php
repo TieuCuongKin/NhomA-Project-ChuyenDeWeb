@@ -2,7 +2,7 @@
 
 namespace JobSeeker\Application\Admin\Services;
 
-use JobSeeker\Port\Secondary\Database\User\UserRepositoryInterface;
+use JobSeeker\Domain\JobSeekerManagement\User\Interfaces\UserRepositoryInterface;
 
 class ManagementUserService
 {

@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use JobSeeker\Domain\Admin\Repository\AdminRepository;
-use JobSeeker\Domain\User\Repository\UserRepository;
-use JobSeeker\Port\Secondary\Database\Admin\AdminRepositoryInterface;
-use JobSeeker\Port\Secondary\Database\User\UserRepositoryInterface;
+use JobSeeker\Domain\JobSeekerManagement\User\Interfaces\UserRepositoryInterface;
+use JobSeeker\Domain\MasterManagement\Admin\Interfaces\AdminRepositoryInterface;
+use JobSeeker\Port\Secondary\Database\Admin\AdminRepository;
+use JobSeeker\Port\Secondary\Database\User\UserRepository;
 
 class JobSeekerServiceProvider extends ServiceProvider
 {
@@ -20,7 +20,6 @@ class JobSeekerServiceProvider extends ServiceProvider
         //
         $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-
     }
 
     /**

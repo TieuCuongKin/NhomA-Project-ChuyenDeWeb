@@ -1,11 +1,11 @@
 <?php
 
-namespace JobSeeker\Domain\User\Repository;
+namespace JobSeeker\Port\Secondary\Database\User;
 
 use Illuminate\Support\Collection;
+use JobSeeker\Domain\JobSeekerManagement\User\Interfaces\UserRepositoryInterface;
 use JobSeeker\Port\Secondary\Database\Base\EloquentBaseRepository;
 use JobSeeker\Port\Secondary\Database\User\User;
-use JobSeeker\Port\Secondary\Database\User\UserRepositoryInterface;
 
 class UserRepository extends EloquentBaseRepository implements UserRepositoryInterface
 {

@@ -1,9 +1,8 @@
 <?php
 
-namespace JobSeeker\Domain\Admin\Repository;
+namespace JobSeeker\Port\Secondary\Database\Admin;
 
-use JobSeeker\Port\Secondary\Database\Admin\Admin;
-use JobSeeker\Port\Secondary\Database\Admin\AdminRepositoryInterface;
+use JobSeeker\Domain\MasterManagement\Admin\Interfaces\AdminRepositoryInterface;
 use JobSeeker\Port\Secondary\Database\Base\EloquentBaseRepository;
 
 class AdminRepository extends EloquentBaseRepository implements AdminRepositoryInterface

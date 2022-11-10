@@ -5,7 +5,7 @@ namespace JobSeeker\Port\Secondary\Database\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use JobSeeker\Domain\Admin\Model\Admin as AdminDomainModel;
+use JobSeeker\Domain\MasterManagement\Admin\Model\Admin as AdminDomainModel;
 
 class Admin extends Authenticatable
 {

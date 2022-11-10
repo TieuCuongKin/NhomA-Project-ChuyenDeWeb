@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use JobSeeker\Domain\User\Model\User as UserDomainModel;
+use JobSeeker\Domain\JobSeekerManagement\User\Model\User as UserDomainModel;
 
 class User extends Authenticatable
 {

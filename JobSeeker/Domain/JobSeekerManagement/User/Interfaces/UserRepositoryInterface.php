@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Port\Secondary\Database\User;
+namespace JobSeeker\Domain\JobSeekerManagement\User\Interfaces;
 
 use Illuminate\Support\Collection;
 
@@ -12,4 +12,6 @@ interface UserRepositoryInterface
      * @return Collection
      */
     public function getAll(): Collection;
+
+
 }
