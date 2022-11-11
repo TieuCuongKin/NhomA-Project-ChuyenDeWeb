@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * JobSeeker Service Providers...
+         */
+        App\Providers\JobSeekerServiceProvider::class,
     ],
 
     /*
