@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostJob extends Model
 {
-    use HasFactory;
+   protected $table = 'post_job';
+   public function company()
+   {
+    return $this->hasOne(AppliedJob::class);
+   }
 }

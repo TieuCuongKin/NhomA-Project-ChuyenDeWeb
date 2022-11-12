@@ -14,14 +14,14 @@ class CreatePostJobTable extends Migration
     public function up()
     {
         Schema::create('post_job', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('post_job_id');
             $table->string('job_title');
             $table->integer('company_id');
-            $table->string('job_type');
+            $table->integer('job_type_id');
             $table->string('job_location_id');
             $table->integer('job_salary_min');
             $table->integer('job_salary_max');
-            $table->text('job_description');
+            $table->text('job_description', 1500);
             $table->timestamp('job_posting_date');
             $table->date('job_expired_at');
             $table->tinyInteger('job_status');

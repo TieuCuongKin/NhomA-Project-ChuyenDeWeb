@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppliedJob extends Model
 {
-    public function getJob()
+    public function companys()
     {
         return $this->belongsTo(Company::class);
     } 
-    public function userJob()
+    public function users()
     {
         return $this->hasOne(User::class);
     } 

@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    use HasFactory;
+   protected $table = 'company';
+   public function posts()
+   {
+    return $this->belongsTo(Post::class);
+   }
+   public function locations(){
+      return $this->belongsTo(Location::class);
+   }
 }
+

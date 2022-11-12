@@ -14,7 +14,7 @@ class CreateCompanyTable extends Migration
     public function up()
     {
         Schema::create('company', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('company_id');
             $table->string('company_name');
             $table->string('company_address');
             $table->string('company_email');

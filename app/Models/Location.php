@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    use HasFactory;
+   public function companys(){
+    return $this->belongsTo(Company::class);
+   }
 }

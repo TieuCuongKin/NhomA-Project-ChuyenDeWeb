@@ -14,7 +14,7 @@ class CreateApplieJobTable extends Migration
     public function up()
     {
         Schema::create('applie_job', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('applie_id');
             $table->integer('user_id');
             $table->integer('job_id');
             $table->string('upload_cv');
