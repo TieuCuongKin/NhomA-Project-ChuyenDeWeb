@@ -28,8 +28,8 @@ abstract class BaseModel extends Model
      */
     protected array $filter = [
         'status' => [
-            'Active' => 1,
-            'Inactive' => 0,
+            'Active' => 0,
+            'Inactive' => 1
         ]
     ];
 
@@ -142,15 +142,15 @@ abstract class BaseModel extends Model
 
     /**
      * @param BaseDomainModel $model
-     * @param array $options
+     * @param array           $options
+     *
      * @return BaseDomainModel
      * @throws Exception
      */
-    public function saveData($model, array $options = []): BaseDomainModel
+    public function saveData(BaseDomainModel $model, array $options = []): BaseDomainModel
     {
         $this->fromDomainEntity($model);
         $this->original = $model->getOriginal();
-
         $this->exists = (bool) $this->getKey();
 
         if ($this->timestamps === true) {

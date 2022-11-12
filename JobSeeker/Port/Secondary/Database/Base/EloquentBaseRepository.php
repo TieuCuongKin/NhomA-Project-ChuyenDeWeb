@@ -2,7 +2,6 @@
 
 namespace JobSeeker\Port\Secondary\Database\Base;
 
-use JobSeeker\Domain\Base\BaseDomainModel;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as CollectionDao;
@@ -216,18 +215,6 @@ class EloquentBaseRepository
     public function deleteModelDao($value, string $column = 'id'): bool
     {
         return $this->createQuery()->where($column, $value)->delete();
-    }
-
-    /**
-     * Create multiple new data
-     *
-     * @param array $data
-     * @return Model
-     * @deprecated
-     */
-    public function createMany(array $data): Model
-    {
-        return $this->model->createMany($data);
     }
 
     public function deleteByIds(array $ids): bool

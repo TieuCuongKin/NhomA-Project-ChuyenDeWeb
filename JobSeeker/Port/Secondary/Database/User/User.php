@@ -2,13 +2,12 @@
 
 namespace JobSeeker\Port\Secondary\Database\User;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use JobSeeker\Domain\JobSeekerManagement\User\Model\User as UserDomainModel;
+use JobSeeker\Port\Secondary\Database\Base\BaseModel;
 
-class User extends Authenticatable
+class User extends BaseModel
 {
     use HasFactory, Notifiable;
 

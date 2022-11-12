@@ -36,7 +36,6 @@ class User extends BaseDomainModel
      */
     private string $password;
 
-
     /**
      * @var int
      */

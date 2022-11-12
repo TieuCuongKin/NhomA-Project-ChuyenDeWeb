@@ -25,16 +25,13 @@ Route::group([
         Route::get('/logout','AdminController@logout')->name('logout');
         Route::get('/dashboard','AdminController@index')->name('index');
 
-
         Route::prefix('user')->group(function () {
             Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
-            Route::get('view-profile/{userId}', 'UserController@viewProfile');
-            Route::post('update-status', 'UserController@updateStatus');
-            Route::post('reapprove', 'UserController@reapprove');
-            Route::post('fake', 'UserController@fakeUser');
-            Route::post('upload-bulk-approval-csv', 'UserController@uploadBulkApprovalCsv');
-            Route::delete('{userId}', 'UserController@delete');
-            Route::post('copy', 'UserController@copy');
+            Route::get('/add', 'UserController@create')->name('jobseeker.add');
+            Route::post('/add', 'UserController@store')->name('jobseeker.add');
+            Route::get('/edit/{id}', 'UserController@edit')->name('jobseeker.edit');
+            Route::put('/edit/{id}', 'UserController@update');
+            Route::delete('/delete/{id}', 'UserController@delete')->name('jobseeker.delete');
         });
     });
 });
