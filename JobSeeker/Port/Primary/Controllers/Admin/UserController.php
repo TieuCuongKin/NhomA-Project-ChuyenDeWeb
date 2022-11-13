@@ -44,6 +44,16 @@ class UserController extends Controller
         return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
     }
 
+    /**
+     * @throws Exception
+     */
+    public function show(int $id)
+    {
+        $this->data = $this->managementUserService->getUserById($id);
+
+        return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
+    }
+
     public function edit(int $id)
     {
         $this->data = $this->managementUserService->getUserById($id);

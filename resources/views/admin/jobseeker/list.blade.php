@@ -51,8 +51,10 @@
                                                         data-target="#edit" data-toggle="modal"
                                                         class="btn-info btn-edit" type="button">
                                                     <i class="fa-solid fa-pencil"></i></button>
-                                                <button type="button" class="btn-success"><i
-                                                            class="fa-solid fa-eye"></i></button>
+                                                <button data-url="{{ route('admin.jobseeker.show',$jobseeker['id']) }}"
+                                                        data-target="#show" data-toggle="modal"
+                                                        type="button" class="btn-success">
+                                                    <i class="fa-solid fa-eye"></i></button>
                                                 <button data-url="{{ route('admin.jobseeker.delete',$jobseeker['id']) }}"
                                                         data-target="#delete" data-toggle="modal"
                                                         class="btn-danger btn-delete" type="button">
@@ -60,8 +62,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{ $jobseekers->links() }}
                                     </tbody>
+                                    <tfoot>
+                                        {{ $jobseekers->links('pagination::bootstrap-4') }}
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -133,6 +137,27 @@
                                     },
                                     success: function (response) {
                                         window.location.reload();
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+
+                                    }
+                                })
+                            })
+                            $('.btn-show').click(function(){
+                                var url = $(this).attr('data-url');
+                                $.ajax({
+                                    type: 'get',
+                                    url: url,
+                                    success: function(response) {
+                                        console.log(response)
+                                        $('p#id').text(response.data.id)
+                                        $('p#fullname').text(response.data.fullname)
+                                        $('p#gender').text(response.data.gender)
+                                        $('p#phone').text(response.data.phone)
+                                        $('p#address').text(response.data.address)
+                                        $('p#status').text(response.data.status)
+                                        $('p#created_at').text(response.data.created_at)
+                                        $('p#update_at').text(response.data.update_at)
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
 
