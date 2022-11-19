@@ -12,7 +12,7 @@
                 </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <form method="Post" action="{{ route('admin.jobseeker.add') }}">
+                    <form id="form-edit" method="POST" role="form" action="{{ route('admin.jobseeker.add') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -33,6 +33,10 @@
                                 <option value="0">Male</option>
                                 <option value="1">Female</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="examplePhone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="exampleInputPhone" name="phone">
                         </div>
                         <div class="mb-3">
                             <label for="exampleAddress" class="form-label">Address</label>

@@ -78,7 +78,7 @@ return [
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => JobSeeker\Port\Secondary\Database\Admin\Admin::class,
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
