@@ -1,9 +1,9 @@
 <?php
 
-namespace JobSeeker\Application\Admin\Services;
+namespace App\Services;
 
+use App\Repositories\AdminRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
-use JobSeeker\Domain\MasterManagement\Admin\Interfaces\AdminRepositoryInterface;
 
 class AdminService
 {

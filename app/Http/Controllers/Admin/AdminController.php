@@ -1,11 +1,12 @@
 <?php
 
-namespace JobSeeker\Port\Primary\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Services\AdminService;
 use Illuminate\Support\Facades\Auth;
-use JobSeeker\Application\Admin\Services\AdminService;
+use Illuminate\Http\RedirectResponse;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,7 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function loginRequest(AdminRequest $request)
+    public function loginRequest(AdminRequest $request): RedirectResponse
     {
         if($this->adminService->checkLogin($request->all()))
         {
@@ -34,7 +35,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
