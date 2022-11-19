@@ -53,7 +53,7 @@
                                                     <i class="fa-solid fa-pencil"></i></button>
                                                 <button data-url="{{ route('admin.jobseeker.show',$jobseeker['id']) }}"
                                                         data-target="#show" data-toggle="modal"
-                                                        type="button" class="btn-success">
+                                                        class="btn-success btn-show" type="button">
                                                     <i class="fa-solid fa-eye"></i></button>
                                                 <button data-url="{{ route('admin.jobseeker.delete',$jobseeker['id']) }}"
                                                         data-target="#delete" data-toggle="modal"
@@ -78,6 +78,27 @@
                             type="text/javascript" charset="utf-8" async defer></script>
                     <script type="text/javascript">
                         $(document).ready(function () {
+                            $('.btn-show').click(function(){
+                                console.log('hi');
+                                var url = $(this).attr('data-url');
+                                $('#modal-show').modal('show');
+                                $.ajax({
+                                    type: 'get',
+                                    url: url,
+                                    success: function(response) {
+                                        console.log(response)
+                                        $('p#id').text(response.data.id)
+                                        $('p#fullname').text(response.data.full_name)
+                                        $('p#gender').text(response.data.gender)
+                                        $('p#phone').text(response.data.phone)
+                                        $('p#address').text(response.data.address)
+                                        $('p#status').text(response.data.status)
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+
+                                    }
+                                })
+                            })
                             $('.btn-delete').click(function(){
                                 var url = $(this).attr('data-url');
                                 var _this = $(this);
@@ -112,6 +133,9 @@
                                         $('#fullname-edit').val(response.data.full_name);
                                         $('#gender-edit').val(response.data.gender);
                                         $('#phone-edit').val(response.data.phone);
+                                        $('#address-edit').val(response.data.address);
+                                        $('#status-edit').val(response.data.status);
+
                                         //thêm data-url chứa route sửa todo đã được chỉ định vào form sửa.
                                         $('#form-edit').attr('data-url', '{{ asset('/admin/user/edit') }}/'+ response.data.id);
                                     },
@@ -134,30 +158,11 @@
                                         fullname: $('#fullname-edit').val(),
                                         gender: $('#gender-edit').val(),
                                         phone: $('#phone-edit').val(),
+                                        address: $('#address-edit').val(),
+                                        status: $('#status-edit').val(),
                                     },
                                     success: function (response) {
                                         window.location.reload();
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-
-                                    }
-                                })
-                            })
-                            $('.btn-show').click(function(){
-                                var url = $(this).attr('data-url');
-                                $.ajax({
-                                    type: 'get',
-                                    url: url,
-                                    success: function(response) {
-                                        console.log(response)
-                                        $('p#id').text(response.data.id)
-                                        $('p#fullname').text(response.data.fullname)
-                                        $('p#gender').text(response.data.gender)
-                                        $('p#phone').text(response.data.phone)
-                                        $('p#address').text(response.data.address)
-                                        $('p#status').text(response.data.status)
-                                        $('p#created_at').text(response.data.created_at)
-                                        $('p#update_at').text(response.data.update_at)
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
 

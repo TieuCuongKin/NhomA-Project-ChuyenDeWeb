@@ -6,13 +6,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <h2>JobSeeker Detail</h2>
                 Id: <p id="id"></p>
-                Full Name: <p id=""></p>
-                Gender: <p id=""></p>
-                Phone: <p id=""></p>
-                Address: <p id=""></p>
-                Status: <p id=""></p>
+                Full Name: <p id="fullname"></p>
+                Gender: <p id="gender"></p>
+                Phone: <p id="phone"></p>
+                Address: <p id="address"></p>
+                Status: <p id="status"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

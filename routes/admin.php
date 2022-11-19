@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'namespace' => 'JobSeeker\Port\Primary\Controllers\Admin',
+    'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => '/admin',
     'as'=>'admin.'
 ], function () {

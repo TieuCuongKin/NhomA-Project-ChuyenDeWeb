@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\Admin\AdminRepository;
+use App\Repositories\AdminRepositoryInterface;
+use App\Repositories\User\UserRepository;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
-use JobSeeker\Domain\JobSeekerManagement\User\Interfaces\UserRepositoryInterface;
-use JobSeeker\Domain\MasterManagement\Admin\Interfaces\AdminRepositoryInterface;
-use JobSeeker\Port\Secondary\Database\Admin\AdminRepository;
-use JobSeeker\Port\Secondary\Database\User\UserRepository;
+
 
 class JobSeekerServiceProvider extends ServiceProvider
 {

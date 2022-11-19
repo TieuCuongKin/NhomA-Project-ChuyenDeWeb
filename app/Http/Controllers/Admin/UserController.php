@@ -1,14 +1,14 @@
 <?php
 
-namespace JobSeeker\Port\Primary\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Http\ResponseHandler\ApiResponseHandler;
+use App\Services\ManagementUserService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use JobSeeker\Application\Admin\Services\ManagementUserService;
-use JobSeeker\Port\Primary\ResponseHandler\Api\ApiResponseHandler;
 
 class UserController extends Controller
 {
@@ -37,11 +37,14 @@ class UserController extends Controller
         return view('admin.jobseeker.add');
     }
 
-    public function store(UserRequest $request)
+    /**
+     * @throws Exception
+     */
+    public function store(Request $request)
     {
         $this->data = $this->managementUserService->createNewUser($request->all());
 
-        return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
+        return redirect()->route('admin.jobseeker.list');
     }
 
     /**
@@ -54,7 +57,10 @@ class UserController extends Controller
         return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
     }
 
-    public function edit(int $id)
+    /**
+     * @throws Exception
+     */
+    public function edit(int $id): \Illuminate\Http\JsonResponse
     {
         $this->data = $this->managementUserService->getUserById($id);
 
@@ -64,7 +70,7 @@ class UserController extends Controller
     /**
      * @throws Exception
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): \Illuminate\Http\JsonResponse
     {
         $response = $this->managementUserService->updateUser($id, $request->all());
         $this->setResponse($response['status'], $response['message'], $response['data']);
@@ -75,7 +81,7 @@ class UserController extends Controller
     /**
      * @throws Exception
      */
-    public function delete($id)
+    public function delete($id): \Illuminate\Http\JsonResponse
     {
         $response = $this->managementUserService->deleteUserAccount($id);
         $this->setResponse($response['status'], $response['message'], $response['data']);

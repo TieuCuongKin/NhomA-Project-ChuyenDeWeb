@@ -31,6 +31,19 @@
                         <input type="number" class="form-control" id="phone-edit" placeholder="Input your phone number">
                     </div>
 
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" class="form-control" id="address-edit" placeholder="Input your address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select name="status" id="status-edit" class="form-control" required="required">
+                            <option value="1">Active</option>
+                            <option value="2">Deactivate</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Edit</button>
