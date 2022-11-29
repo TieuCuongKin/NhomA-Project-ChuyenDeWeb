@@ -51,15 +51,11 @@
                                                         data-target="#edit" data-toggle="modal"
                                                         class="btn-info btn-edit" type="button">
                                                     <i class="fa-solid fa-pencil"></i></button>
-<<<<<<< HEAD
                                                 <button data-url="{{ route('admin.jobseeker.show',$jobseeker['id']) }}"
                                                         data-target="#show" data-toggle="modal"
                                                         class="btn-success btn-show" type="button">
                                                     <i class="fa-solid fa-eye"></i></button>
-=======
-                                                <button type="button" class="btn-success"><i
-                                                            class="fa-solid fa-eye"></i></button>
->>>>>>> parent of 7d2478b (List User)
+
                                                 <button data-url="{{ route('admin.jobseeker.delete',$jobseeker['id']) }}"
                                                         data-target="#delete" data-toggle="modal"
                                                         class="btn-danger btn-delete" type="button">

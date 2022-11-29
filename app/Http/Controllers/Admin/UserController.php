@@ -47,7 +47,6 @@ class UserController extends Controller
         return redirect()->route('admin.jobseeker.list');
     }
 
-<<<<<<< HEAD:app/Http/Controllers/Admin/UserController.php
     /**
      * @throws Exception
      */
@@ -61,10 +60,7 @@ class UserController extends Controller
     /**
      * @throws Exception
      */
-    public function edit(int $id): \Illuminate\Http\JsonResponse
-=======
     public function edit(int $id)
->>>>>>> parent of 7d2478b (List User):JobSeeker/Port/Primary/Controllers/Admin/UserController.php
     {
         $this->data = $this->managementUserService->getUserById($id);
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="modal fade" id="show">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,5 +19,3 @@
         </div>
     </div>
 </div>
-=======
->>>>>>> parent of 7d2478b (List User)

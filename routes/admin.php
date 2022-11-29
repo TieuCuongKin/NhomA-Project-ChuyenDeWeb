@@ -29,6 +29,7 @@ Route::group([
             Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
             Route::get('/add', 'UserController@create')->name('jobseeker.add');
             Route::post('/add', 'UserController@store')->name('jobseeker.add');
+            Route::get('/show/{id}', 'UserController@show')->name('jobseeker.show');
             Route::get('/edit/{id}', 'UserController@edit')->name('jobseeker.edit');
             Route::put('/edit/{id}', 'UserController@update');
             Route::delete('/delete/{id}', 'UserController@delete')->name('jobseeker.delete');
