@@ -46,7 +46,7 @@ class EloquentBaseRepository
     }
 
     //Edit
-    public function update($id, array $attributes): bool|int
+    public function update($id, array $attributes)
     {
         return $this->findById($id)->update($attributes);
     }
