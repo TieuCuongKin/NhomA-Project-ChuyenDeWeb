@@ -28,4 +28,8 @@ class User extends Model
     public function userDetail() {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
+
+    public function company() {
+        return $this->hasOne(Company::class, 'user_id', 'id');
+    }
 }

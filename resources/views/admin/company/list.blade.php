@@ -6,15 +6,15 @@
             <main>
                 <div class="container-fluid px-4">
                     <div class="row">
-                        <div class="col-10"><h1>List JobSeeker</h1></div>
+                        <div class="col-10"><h1>List Companies</h1></div>
                         <div class="col">
-                            <form action="{{route('admin.jobseeker.add')}}">
-                                <button class="btn btn-primary" type="submit">Add JobSeeker +</button>
+                            <form action="{{route('admin.company.add')}}">
+                                <button class="btn btn-primary" type="submit">Add Company +</button>
                             </form>
                         </div>
                     </div>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">JobSeeker</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Company</a></li>
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
@@ -28,56 +28,50 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th width="20%">Name</th>
-                                        <th>Gender</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
+                                        <th width="20%">Image</th>
+                                        <th width="20%">Company Name</th>
+                                        <th>Company Contact</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($jobseekers as $jobseeker)
+                                    @foreach($companies as $company)
                                         <tr>
-                                            <td>{{ $jobseeker->id }}</td>
-                                            <td>{{ $jobseeker->userDetail->full_name }}</td>
-                                            @if( $jobseeker->userDetail->gender == 0)
-                                                <td>Male</td>
-                                            @else
-                                                <td>Female</td>
-                                            @endif
-                                            <td>{{ $jobseeker->userDetail->phone }}</td>
-                                            <td>{{ $jobseeker->email }}</td>
-                                            @if( $jobseeker->status == 1)
+                                            <td>{{ $company->id }}</td>
+                                            <td><img src="{{ asset($company->image) }}" width="100px"></td>
+                                            <td>{{ $company->company_name }}</td>
+                                            <td>{{ $company->company_contact }}</td>
+                                            @if( $company->user->status )
                                                 <td><span class="badge rounded-pill bg-success">Active</span></td>
                                             @else
                                                 <td><span class="badge rounded-pill bg-danger">Deactivate</span></td>
                                             @endif
                                             <td class="text-center">
-                                                <button data-url="{{ route('admin.jobseeker.edit',$jobseeker['id']) }}"
+                                                <button data-url="{{ route('admin.jobseeker.edit',$company['id']) }}"
                                                         data-target="#edit" data-toggle="modal"
                                                         class="btn-info btn-edit" type="button">
                                                     <i class="fa-solid fa-pencil"></i></button>
-                                                <button data-url="{{ route('admin.jobseeker.show',$jobseeker['id']) }}"
+                                                <button data-url="{{ route('admin.company.show',$company['id']) }}"
                                                         data-target="#show" data-toggle="modal"
                                                         class="btn-success btn-show" type="button">
                                                     <i class="fa-solid fa-eye"></i></button>
 
-                                                <button data-url="{{ route('admin.jobseeker.delete',$jobseeker['id']) }}"
+                                                <button data-url="{{ route('admin.company.delete',$company['id']) }}"
                                                         data-target="#delete" data-toggle="modal"
                                                         class="btn-danger btn-delete" type="button">
                                                     <i class="fa-solid fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{ $jobseekers->links() }}
+                                    {{ $companies->links() }}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    @include('admin.jobseeker.edit')
-                    @include('admin.jobseeker.detail')
+                    @include('admin.company.edit')
+                    @include('admin.company.detail')
 
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"
@@ -116,7 +110,7 @@
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                         },
                                         success: function(response) {
-                                            toastr.success('Delete student success!')
+                                            toastr.success('Delete company success!')
                                             window.location.reload();
                                         },
                                         error: function (jqXHR, textStatus, errorThrown) {

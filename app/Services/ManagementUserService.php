@@ -119,7 +119,7 @@ class ManagementUserService
         try {
             $userData = [
                 'email' => $param['email'],
-                'status' => UserStatus::Active,
+                'status' => $param['status'],
             ];
             $this->userRepository->update($id, $userData);
             $userDetailData = [
@@ -128,7 +128,7 @@ class ManagementUserService
                 'address' => $param['address'],
                 'phone' => $param['phone'],
             ];
-            $this->userDetailRepository->update($user->userDetail->id,$userDetailData);
+            $this->userDetailRepository->update($user->userDetail->id, $userDetailData);
 
             $this->message = __('api_messages.user.successfully_updated');
             DB::commit();
@@ -146,7 +146,7 @@ class ManagementUserService
     public function deleteUserAccount(int $id): array
     {
         DB::beginTransaction();
-        $userDomainModel = $this->userRepository->findById($id);
+        $userDomainModel = $this->userRepository->findById($id, ['userDetail']);
         if (!$userDomainModel) {
             $this->status = Response::HTTP_NOT_FOUND;
             $this->message = __('api_messages.user.not_found');
@@ -155,6 +155,7 @@ class ManagementUserService
         }
 
         try {
+            $this->userDetailRepository->delete($userDomainModel->userDetail->id);
             $this->userRepository->delete($id);
             $this->message = __('api_messages.user.successfully_delete');
             DB::commit();
@@ -166,7 +167,7 @@ class ManagementUserService
     }
 
     /**
-     * Format Registration data
+     * Format data
      *
      * @return array
      */

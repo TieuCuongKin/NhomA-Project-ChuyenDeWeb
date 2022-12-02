@@ -9,6 +9,7 @@ use App\Services\ManagementUserService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -69,7 +70,7 @@ class UserController extends Controller
     /**
      * @throws Exception
      */
-    public function update(Request $request, int $id): \Illuminate\Http\JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
         $response = $this->managementUserService->updateUser($id, $request->all());
         $this->setResponse($response['status'], $response['message'], $response['data']);
@@ -80,7 +81,7 @@ class UserController extends Controller
     /**
      * @throws Exception
      */
-    public function delete($id): \Illuminate\Http\JsonResponse
+    public function delete($id): JsonResponse
     {
         $response = $this->managementUserService->deleteUserAccount($id);
         $this->setResponse($response['status'], $response['message'], $response['data']);

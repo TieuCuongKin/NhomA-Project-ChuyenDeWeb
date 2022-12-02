@@ -31,7 +31,7 @@ Route::group([
             Route::post('/add', 'UserController@store')->name('jobseeker.add');
             Route::get('/show/{id}', 'UserController@show')->name('jobseeker.show');
             Route::get('/edit/{id}', 'UserController@edit')->name('jobseeker.edit');
-            Route::put('/edit/{id}', 'UserController@update');
+            Route::put('/edit/{id}', 'UserController@update')->name('company.edit');
             Route::delete('/delete/{id}', 'UserController@delete')->name('jobseeker.delete');
         });
 
@@ -41,8 +41,13 @@ Route::group([
         });
 
         Route::prefix('company')->group(function () {
-            //Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
+            Route::get('/list', 'CompanyController@index')->name('company.list');
             Route::get('/add', 'CompanyController@create')->name('company.add');
+            Route::post('/add', 'CompanyController@store')->name('company.add');
+            Route::get('/show/{id}', 'CompanyController@show')->name('company.show');
+            Route::get('/edit/{id}', 'CompanyController@edit')->name('company.edit');
+            Route::put('/edit/{id}', 'CompanyController@update')->name('company.edit');
+            Route::delete('/delete/{id}', 'CompanyController@destroy')->name('company.delete');
         });
 
         Route::prefix('upload')->group(function () {

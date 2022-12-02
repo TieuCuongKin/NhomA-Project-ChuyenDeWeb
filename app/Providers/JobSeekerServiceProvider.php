@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Admin\AdminRepository;
 use App\Repositories\AdminRepositoryInterface;
+use App\Repositories\Company\CompanyRepository;
+use App\Repositories\CompanyRepositoryInterface;
 use App\Repositories\Location\LocationRepository;
 use App\Repositories\LocationRepositoryInterface;
 use App\Repositories\User\UserDetailRepository;
@@ -27,6 +29,7 @@ class JobSeekerServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(UserDetailRepositoryInterface::class, UserDetailRepository::class);
         $this->app->bind(LocationRepositoryInterface::class, LocationRepository::class);
+        $this->app->bind(CompanyRepositoryInterface::class, CompanyRepository::class);
     }
 
     /**

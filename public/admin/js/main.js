@@ -14,9 +14,9 @@ $('#images').change(function () {
         },
         url: '/admin/upload/services',
         success: function(results) {
-            if(results.error == false) {
+            if(results.error === false) {
                 $('#image_show').html('<a href="'+ results.url +'"><img src="' + results.url + '" width="100px" style="margin-top: 20px"></a>');
-                $('#file').val(results.url);
+                $('#thumb').val(results.url);
             } else {
                 alert('Upload file failed');
             }

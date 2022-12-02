@@ -57,35 +57,18 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="{{ route('admin.jobseeker.list') }}">
                 <i class="fa-solid fa-user"></i>
                 <span> JobSeeker</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{ route('admin.jobseeker.list') }}">List JobSeeker</a>
-                    <a class="collapse-item" href="{{ route('admin.jobseeker.add') }}">Add JobSeeker</a>
-                </div>
-            </div>
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-               aria-expanded="true" aria-controls="collapseThree">
+            <a class="nav-link collapsed" href="{{ route('admin.company.list') }}">
                 <i class="fa-solid fa-building"></i>
                 <span>Company</span>
             </a>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{ route('admin.location.list') }}">List Company</a>
-                    <a class="collapse-item" href="{{ route('admin.company.add') }}">Add Company</a>
-
-                </div>
-            </div>
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -107,15 +90,31 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Utilities</span>
+                <i class="fa-solid fa-envelopes-bulk"></i>
+                <span>Post Job</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
+                    <a class="collapse-item" href="utilities-color.html">List Job</a>
+                    <a class="collapse-item" href="utilities-border.html">Post Job</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="#collapseFive">
+                <i class="fa-solid fa-check-to-slot"></i>
+                <span>Applies Job</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Utilities:</h6>
+                    <a class="collapse-item" href="utilities-color.html">List Applies Job</a>
                 </div>
             </div>
         </li>

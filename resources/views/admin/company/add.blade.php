@@ -12,7 +12,7 @@
                 </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <form id="form-edit" method="POST" role="form" action="{{ route('admin.company.add') }}">
+                    <form id="form-add" method="POST" role="form" action="{{ route('admin.company.add') }}">
                         @csrf
                         <div class="row mb-3">
                             <div class="col-6">
@@ -37,7 +37,7 @@
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="examplePhone" class="form-label">Company Contact</label>
-                                <input type="text" class="form-control" id="exampleInputPhone" name="companyPhone">
+                                <input type="text" class="form-control" id="exampleInputPhone" name="companyContact">
                             </div>
                             <div class="col-6">
                                 <label for="exampleWebsite" class="form-label">Company Website</label>
@@ -46,14 +46,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleDescription" class="form-label">Description</label>
-                            <textarea id="summernote" name="editordata"></textarea>
+                            <textarea id="summernote" name="companyDescription"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleFile" class="form-label">Company Logo</label>
-                            <input type="file" name="file" class="form-control" id="images"/>
+                            <input type="file" class="form-control" id="images" name="file"/>
                             <div id="image_show">
 
                             </div>
+                            <input type="hidden" name="thumb" id="thumb" class="form-control">
                         </div>
                         <div class="row justify-content-center" id="showImage"></div>
 

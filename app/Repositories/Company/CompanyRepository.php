@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Repositories\User;
+namespace App\Repositories\Company;
 
 use App\Enum\UserType;
-use App\Models\User;
+use App\Models\Company;
+use App\Repositories\CompanyRepositoryInterface;
 use App\Repositories\Eloquent\EloquentBaseRepository;
-use App\Repositories\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class UserRepository extends EloquentBaseRepository implements UserRepositoryInterface
+class CompanyRepository extends EloquentBaseRepository implements CompanyRepositoryInterface
 {
-    public function __construct(User $model)
+    public function __construct(Company $model)
     {
         parent::__construct($model);
     }
 
-    public function getAllUser(?string $search = "", int $perPage = 10, ?array $with = null) : LengthAwarePaginator
+    public function getAllCompany(?string $search = "", int $perPage = 10, ?array $with = null): LengthAwarePaginator
     {
-        $query = $this->model->newModelQuery()->where('user_type_id', UserType::JobSeeker);
+        $query = $this->model->newModelQuery();
         if (!empty($with)) {
             $query->where(function ($query) use ($with) {
                 return $query->with($with);
@@ -27,7 +27,7 @@ class UserRepository extends EloquentBaseRepository implements UserRepositoryInt
         if (!empty($search)) {
             $query->where(function ($query) use ($search) {
                 return $query->where('id', $search)
-                    ->orWhere('full_name', 'LIKE', '%' . $search . '%');
+                    ->orWhere('company_name', 'LIKE', '%' . $search . '%');
             });
         }
 
