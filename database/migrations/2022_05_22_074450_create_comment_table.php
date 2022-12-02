@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplieJobTable extends Migration
+class CreateCommentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateApplieJobTable extends Migration
      */
     public function up()
     {
-        Schema::create('applie_job', function (Blueprint $table) {
+        Schema::create('comment', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('job_id');
-            $table->string('upload_cv');
-            $table->tinyInteger('status');
+            $table->integer('customer_id');
+            $table->String('customer_name',150);
+            $table->integer('parent_id');
+            $table->string('comment_content',255);
+            $table->tinyInteger('rating')->default(0)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateApplieJobTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applie_job');
+        Schema::dropIfExists('comment');
     }
 }

@@ -74,9 +74,8 @@
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
                                         <div class="text-start ps-4">
-
-                                            <li><a data-toggle="tab" href="{{ $value->post_job_id }}">{{ $value->job_title }}</a></li>
-
+                                        <li><h3 class="product-name"><a href="{{ route('jobdetail',$value->job_type_id) }}">{{ $value->job_title  }}</a></h3><li>
+                                      
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
@@ -104,7 +103,7 @@
                                             <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
                                             <div class="text-start ps-4">
 
-                                                <li><a data-toggle="tab" href="#np{{ $value->job_type_id }}">{{ $value->job_title }}</a></li>
+                                            <li><h3 class="product-name"><a href="{{ route('jobdetail',$value->job_type_id) }}">{{ $value->job_title  }}</a></h3><li>
 
                                             </div>
                                         </div>
@@ -133,7 +132,7 @@
                                                 <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
                                                 <div class="text-start ps-4">
 
-                                                    <li><a data-toggle="tab" href="#np{{ $value->job_type_id }}">{{ $value->job_title }}</a></li>
+                                                <li><h3 class="product-name"><a href="{{ route('jobdetail',$value->job_type_id) }}">{{ $value->job_title  }}</a></h3><li>
 
                                                 </div>
                                             </div>

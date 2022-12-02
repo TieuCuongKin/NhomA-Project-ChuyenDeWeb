@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
     <meta charset="utf-8">
     <title>Website Find Job</title>
@@ -62,29 +62,55 @@
                             <a href="{{ route ('testimonial') }}" class="dropdown-item">Testimonial</a>
                         </div>
                     </div>
-                    @if(Auth::guard('cus')->check())
-                    <h6><i class="fa-solid fa-user text-primary"></i><a href="{{ route('thongtinkh',Auth::guard('cus')->user()->id) }}"> {{ Auth::guard('cus')->user()->full_name }}</a></h6>
-                    <div class="text-start ps-5">
-                        <a href="{{ route('logout') }}"><h6 class="text-uppercase"><i class="fa-solid fa-right-from-bracket fs-3 text-danger exit-account"></i></h6></a>
-                    </div>
-                    @else 
-                    <div class="text-start">
-                        <a href="{{ route('login') }}"><h6 class="text-uppercase"><i class="fa fa-users fs-3 text-primary "></i> Đăng Nhập</h6></a>
-                    </div>
-                    <div class="text-start ps-5">
-                        <a href="{{ route('register') }}"><h6 class="text-uppercase"><i class="fa fa-edit fs-3 text-primary"></i> Đăng Kí</h6></a>
-                    </div>
-                    @endif
-                 
                 </div>
-              
             </div>
+                <div class="col-lg-4 text-center bg-w py-4 pt-4">
+                    <div class="d-inline-flex align-items-center justify-content-center">
+                    @if(Auth::guard('cus')->check())
+                        <h6><i class="fa-solid fa-user text-primary"></i><a href="{{ url('thongtinkh',Auth::guard('cus')->user()->id) }}"> {{ Auth::guard('cus')->user()->full_name }}</a></h6>
+                        <div class="text-start ps-5">
+                            <a href="{{ route('logout') }}">
+                                <h6 class="text-uppercase"><i class="fa-solid fa-right-from-bracket fs-3 text-danger exit-account"></i></h6>
+                            </a>
+                        </div>
+                        @else
+                        <div class="text-start">
+                            <a href="{{ route('login') }}">
+                                <h6 class="text-uppercase"><i class="fa fa-users fs-3 text-primary "></i> Đăng Nhập</h6>
+                            </a>
+                        </div>
+                        <div class="text-start ps-5">
+                            <a href="{{ route('register') }}">
+                                <h6 class="text-uppercase"><i class="fa fa-edit fs-3 text-primary"></i> Đăng Kí</h6>
+                            </a>
+                        </div>
+                        @endif
+
+                    </div>
+
+                </div>
         </nav>
         <!-- Navbar End -->
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+            <a href="{{route('index')}}" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-primary me-3 "></i>Delicious</h1>
+            </a>
+            @if(Auth::guard('cus')->check())
+            <a href="{{ route('logout') }}" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 text-uppercase text-white"><i class="fa-solid fa-right-from-bracket text-danger"></i></h1>
+            </a>
+            @else
+            <a href="{{ route('login') }}" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 text-uppercase text-white"><i class="fa-solid fa-user"></i></h1>
+            </a>
+            @endif
 
+
+        </nav>
 
 
         @yield('content')
+        <script src="{{ asset('/js/ajax.js') }}"></script>
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
@@ -120,10 +146,10 @@
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Newsletter</h5>
                         <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
+                        <form action="{{ url('/mail') }}" method="GET">
+							<input class="input" name="mail" type="email" placeholder="Enter Your Email">
+							<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+						</form>
                     </div>
                 </div>
             </div>
@@ -166,8 +192,22 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('/js/main.js') }}"></script>
+    <script type="text/javascript">
+           $('.category-filter').click(function(){
+                var category = [],tempArray = [];
 
-
+                $.each($("[data-filters='category']:checked"),function(){
+                    tempArray.push($(this).val());
+                   
+                });
+                tempArray.reverse();
+                if(tempArray.length !== 0){
+                    category += '?cate=' + tempArray.toString();
+                }
+                window.location.href = category;
+            });
+    </script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
 </body>
 
 </html>

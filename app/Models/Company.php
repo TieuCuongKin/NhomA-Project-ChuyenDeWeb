@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
    protected $table = 'company';
-   public function posts()
+   public function postjob()
    {
-    return $this->belongsTo(Post::class);
+    return $this->belongsTo(PostJob::class, 'company_id' , 'id');
    }
    public function locations(){
       return $this->belongsTo(Location::class);
+   }
+   public function comments()
+   {
+       return $this->hasMany(Comment::class);
    }
 }
 

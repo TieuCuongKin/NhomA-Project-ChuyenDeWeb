@@ -19,7 +19,9 @@ class Customer extends Authenticatable
     protected $fillable = [
         'full_name', 'email', 'password','phone','address','status','token'
     ];
-
+    public function comment_customer(){
+        return $this->belongsTo(Comment::class,'id','customer_id');
+    }
     
     /**
      * The attributes that should be hidden for arrays.

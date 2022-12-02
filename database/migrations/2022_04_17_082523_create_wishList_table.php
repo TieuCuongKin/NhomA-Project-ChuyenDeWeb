@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplieJobTable extends Migration
+class CreateWishListTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateApplieJobTable extends Migration
      */
     public function up()
     {
-        Schema::create('applie_job', function (Blueprint $table) {
+        Schema::create('wishlist', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('job_id');
-            $table->string('upload_cv');
-            $table->tinyInteger('status');
-            $table->timestamps();
+            $table->integer('customer_id');
+            $table->integer('post_job_id');
+
         });
     }
 
@@ -30,6 +28,7 @@ class CreateApplieJobTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applie_job');
+        //
+        Schema::dropIfExists('wishList');
     }
 }

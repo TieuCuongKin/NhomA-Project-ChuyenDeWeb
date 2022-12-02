@@ -18,12 +18,10 @@ class CreateCustomerTable extends Migration
             $table->String('full_name',150);
             $table->String('email',150)->unique();
             $table->String('password',150);
-            $table->String('phone',11);
+            $table->String('phone',10);
             $table->String('address',150);
             $table->timestamps();
-            $table->tinyInteger('status')->default(0)->nullable();
-            $table->String('token',10)->nullable();
-           
+            $table->tinyInteger('status')->default(0)->nullable();       
         });
     }
 

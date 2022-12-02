@@ -1,107 +1,100 @@
 @extends('layout')
 @section('content')
-
-
-        <!-- Header End -->
-        <div class="container-xxl py-5 bg-dark page-header mb-5">
-            <div class="container my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Job Detail</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb text-uppercase">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Job Detail</li>
-                    </ol>
-                </nav>
-            </div>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container-fluid about py-5">
+        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+            <h2 class="text-primary font-secondary">Detail</h2>
+            <h2 class="product-name">{{ $jobdetail->job_title }}</h2>
         </div>
-        <!-- Header End -->
-
-
-        <!-- Job Detail Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="row gy-5 gx-4">
-                    <div class="col-lg-8">
-                        <div class="d-flex align-items-center mb-5">
-                            <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt="" style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h3 class="mb-3">{{ $postjob ->job_title  }}</h3>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $postjob ->job_description  }}</span>
-                               
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- Order Details -->
+                <div class="col-md order-details">
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong> Công ty:</strong></div>
+                            <div>
+                                <h5 class="text-primary">{{$jobdetail->company->company_name}}</h5>
                             </div>
                         </div>
-
-                        <div class="mb-5">
-                            <h4 class="mb-3">{{ $company ->company_name  }}</h4>
-                            <!-- <p>Dolor justo tempor duo ipsum accusam rebum gubergren erat. Elitr stet dolor vero clita labore gubergren. Kasd sed ipsum elitr clita rebum ut sea diam tempor. Sadipscing nonumy vero labore invidunt dolor sed, eirmod dolore amet aliquyam consetetur lorem, amet elitr clita et sed consetetur dolore accusam. Vero kasd nonumy justo rebum stet. Ipsum amet sed lorem sea magna. Rebum vero dolores dolores elitr vero dolores magna, stet sea sadipscing stet et. Est voluptua et sanctus at sanctus erat vero sed sed, amet duo no diam clita rebum duo, accusam tempor takimata clita stet nonumy rebum est invidunt stet, dolor.</p>
-                            <h4 class="mb-3">Responsibility</h4>
-                            <p>Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
-                            </ul> -->
-                            <h4 class="mb-3">{{ $location ->location_name  }}</h4>
-                            <!-- <p>Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
-                                <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
-                            </ul> -->
+                        <div class="order-products">
+                            <div class="order-col">
+                                <div><strong>Địa chỉ:</strong></div>
+                                <h5 class="text-primary">{{ $jobdetail ->location->location_name  }}</h5>
+                            </div>
                         </div>
-        
-                        <div class="">
-                            <h4 class="mb-4">Apply For The Job</h4>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Your Name">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Your Email">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Portfolio Website">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="file" class="form-control bg-white">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="order-col">
+                            <div><strong>Lương:</strong></div>
+                            <div>
+                                <h5 class="text-primary">{{ number_format($jobdetail -> job_salary_max,0,',','.')  }} VND</h5>
+                            </div>
                         </div>
-                    </div>
-        
-                    <div class="col-lg-4">
-                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
-                            <h4 class="mb-4">Job Summery</h4>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: 01 Jan, 2045</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: 123 Position</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: Full Time</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: $123 - $456</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Location: New York, USA</p>
-                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: 01 Jan, 2045</p>
+                        <div class="order-col">
+                            <div><strong>Thời gian hết hạn:</strong></div>
+                            <div><span class="badge bg-primary"><strong>{{ $jobdetail ->job_expired_at  }}</strong></span> </div>
                         </div>
-                        <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
-                            <h4 class="mb-4">Company Detail</h4>
-                            <p class="m-0">Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum sadipscing elitr vero dolores. Lorem dolore elitr justo et no gubergren sadipscing, ipsum et takimata aliquyam et rebum est ipsum lorem diam. Et lorem magna eirmod est et et sanctus et, kasd clita labore.</p>
+                        <div class="order-col">
+                            <div><strong>Thời gian đăng:</strong></div>
+                            <div><span class="badge bg-primary"><strong>{{ $jobdetail ->created_at  }}</strong></span> </div>
                         </div>
                     </div>
                 </div>
+                <div class="order-col">
+                    <div><strong>Mô tả:</strong></div>
+                    <p><?php echo $jobdetail->job_description ?></p>
+                </div>
             </div>
-        </div>
-        <!-- Job Detail End -->
+            <div class="order-col">
+                <div><strong>Đánh giá</strong></div>
+                <div>
+                    <ul class="list-inline ngoisao" title="Average Rating">
+                        @for ($count=1; $count <= 5; $count++) @php if($count<=$sosao){ $color='color:#ffcc00;' ; } else{ $color='color:#ccc;' ; } @endphp <li title="star_rating" class="ngoisao" style="display: inline-block;cusor:pointer; {{$color}};font-size:30px;">&#9733;</li>
+                            @endfor
+                    </ul>
+                </div>
+                <!-- /Order Details -->
+                <div class="owl-carousel testimonial-carousel">
+                    <div class="testimonial-item text-white border-inner p-4">
+                        <div class="align-items-center mb-3">
+                            @if(Auth::guard('cus')->check())
+                            <h4 class="text-primary text-uppercase mb-1">{{ Auth::guard('cus')->user()->full_name }}</h4>
+                            <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{Auth::guard('cus')->user()->id}}">
+                            <input type="hidden" class="form-control" id="customer_name" name="customer_name" value="{{Auth::guard('cus')->user()->full_name}}">
+                            @else
+                            <h4 class="text-primary text-uppercase mb-1">Tài khoản khách</h4>
+                            @endif
+                            <textarea type="text" class="form-control" id="comment_content" name="comment_content" cols="auto" rows="3" placeholder="Nhập nội dung (*)" required></textarea>
+                            <div id="commentHelp" class="form-text mb-3"></div>
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{ $jobdetail->id }}">
+                            @if(Auth::guard('cus')->check())
+                            
+                            <button id="btn-comment" type="button" class="btn btn-primary" data-product-id="{{ $jobdetail->id }}" data-url="{{ route('comments.store') }}">Gửi bình luận</button>
+                            @else
+                            <button class="btn btn-primary" type="button" disabled>Gửi bình luận</button>
+                            @endif
+                        </div>
+                    </div>
+                    <div id="show-comment" class="overflow-auto" style="max-height:300px; ">
+                        @foreach($comments as $comment)
+                        <div class="testimonial-item text-white border-inner p-4" style="background-color:#905ddc !important">
+                            <div class="d-flex align-items-center mb-3">
+                                <img class="img-fluid flex-shrink-0" src="{{url('/img/smile.png')}}" style="width: 60px; height: 60px;">
+                                <div class="ps-3">
+                                    <h4 class="text-white text-uppercase mb-1">{{$comment->customer_name}}</h4>
+                                    <span>{{$comment->rating}} Sao</span>
+                                </div>
+                            </div>
+                            <p class="mb-0">{{$comment->comment_content}}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <!-- /SECTION -->
 
 
-     
-@endsection
+            @endsection

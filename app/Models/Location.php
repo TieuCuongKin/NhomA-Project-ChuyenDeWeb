@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-   public function companys(){
+   protected $table = 'location';
+   public function company(){
     return $this->belongsTo(Company::class);
    }
+   public function postjob(){
+      return $this->belongsTo(PostJob::class, 'location_id', 'id');
+     }
 }

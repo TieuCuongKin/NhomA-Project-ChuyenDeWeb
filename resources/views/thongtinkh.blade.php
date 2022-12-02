@@ -15,8 +15,8 @@
 					</div>
 					@endif
 					<div class="col-md-7">
-						<form action="" method="POST">
-						@csrf
+						<form action="" >
+					
 						<!-- Billing Details -->
 						<div class="row billing-details">
 							<div class="mb-3">
