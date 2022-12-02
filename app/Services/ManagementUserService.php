@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Enum\UserStatus;
+use App\Enum\UserType;
+use App\Repositories\UserDetailRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -29,21 +31,24 @@ class ManagementUserService
 
     protected UserRepositoryInterface $userRepository;
 
+    protected UserDetailRepositoryInterface $userDetailRepository;
+
     /**
      * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, UserDetailRepositoryInterface $userDetailRepository)
     {
         $this->userRepository = $userRepository;
+        $this->userDetailRepository = $userDetailRepository;
 
         $this->status = Response::HTTP_OK;
         $this->message = __('api_messages.successful');
         $this->data = [];
     }
 
-    public function getListUsers(?string $search = "", int $perPage = 10, ?array $ids = null)
+    public function getListUsers(?string $search = "", int $perPage = 10)
     {
-        return $this->userRepository->getAllUser($search, $perPage, $ids);
+        return $this->userRepository->getAllUser($search, $perPage, ['userDetail']);
     }
 
     /**
@@ -52,27 +57,27 @@ class ManagementUserService
     public function createNewUser($param): array
     {
         DB::beginTransaction();
-        $password = encrypt($param['password']);
-        $param['status'] = 1;
-        $param['user_type_id'] = 1;
         try {
-            $user = [
-                $param['fullname'],
-                $param['gender'],
-                $param['address'],
-                $param['phone'],
-                $param['email'],
-                $password,
-                $param['status'],
-                $param['user_type_id'],
+            $userData = [
+                'email' => $param['email'],
+                'password' => encrypt($param['password']),
+                'status' => UserStatus::Active,
+                'user_type_id' => UserType::JobSeeker,
             ];
-
-            $this->userRepository->create($user);
+            $user = $this->userRepository->create($userData);
+            $userDetailData = [
+                'full_name' => $param['fullname'],
+                'gender' => $param['gender'],
+                'address' => $param['address'],
+                'phone' => $param['phone'],
+                'user_id' => $user->id,
+            ];
+            $this->userDetailRepository->create($userDetailData);
             $this->message = __('api_messages.user.successfully_updated');
             DB::commit();
         } catch (Throwable $exception) {
             DB::rollBack();
-            throw new Exception(__('api_messages.failed'));
+            $this->message = $exception;
         }
 
         return $this->handleApiResponse();
@@ -83,15 +88,15 @@ class ManagementUserService
      */
     public function getUserById(int $id): array
     {
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->findById($id, ['userDetail']);
         if (!$user) throw new Exception('User not found');
 
         $this->data['id'] = $user->id;
-        $this->data['full_name'] = $user->full_name;
-        $this->data['gender'] = $user->gender;
+        $this->data['full_name'] = $user->userDetail->full_name;
+        $this->data['gender'] = $user->userDetail->gender;
         $this->data['email'] = $user->email;
-        $this->data['phone'] = $user->phone;
-        $this->data['address'] = $user->address;
+        $this->data['phone'] = $user->userDetail->phone;
+        $this->data['address'] = $user->userDetail->address;
         $this->data['status'] = $user->status;
 
         return $this->data;
@@ -100,12 +105,11 @@ class ManagementUserService
     /**
      * @throws Exception
      */
-    public function updateUser(int $id, array $params): array
+    public function updateUser(int $id, array $param): array
     {
         DB::beginTransaction();
-        $userDomainModel = $this->userRepository->findById($id);
-
-        if (!$userDomainModel) {
+        $user = $this->userRepository->findById($id, ['userDetail']);
+        if (!$user) {
             $this->status = Response::HTTP_NOT_FOUND;
             $this->message = __('api_messages.user.not_found');
 
@@ -113,15 +117,18 @@ class ManagementUserService
         }
 
         try {
-            $array = [
-                'email' => $params['email'],
-                'full_name' => $params['fullname'],
-                'gender' => $params['gender'],
-                'phone' => $params['phone'],
-                'address' => $params['address'],
-                'status' => $params['status']
+            $userData = [
+                'email' => $param['email'],
+                'status' => UserStatus::Active,
             ];
-            $this->userRepository->update($id, $array);
+            $this->userRepository->update($id, $userData);
+            $userDetailData = [
+                'full_name' => $param['fullname'],
+                'gender' => $param['gender'],
+                'address' => $param['address'],
+                'phone' => $param['phone'],
+            ];
+            $this->userDetailRepository->update($user->userDetail->id,$userDetailData);
 
             $this->message = __('api_messages.user.successfully_updated');
             DB::commit();

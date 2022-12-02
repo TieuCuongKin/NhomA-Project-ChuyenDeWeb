@@ -34,5 +34,19 @@ Route::group([
             Route::put('/edit/{id}', 'UserController@update');
             Route::delete('/delete/{id}', 'UserController@delete')->name('jobseeker.delete');
         });
+
+        Route::prefix('location')->group(function (){
+            Route::get('/list', 'LocationController@index')->name('location.list');
+
+        });
+
+        Route::prefix('company')->group(function () {
+            //Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
+            Route::get('/add', 'CompanyController@create')->name('company.add');
+        });
+
+        Route::prefix('upload')->group(function () {
+            Route::post('/services', 'UploadController@store')->name('upload.add');
+        });
     });
 });

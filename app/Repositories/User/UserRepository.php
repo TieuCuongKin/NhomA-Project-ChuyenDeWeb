@@ -14,9 +14,15 @@ class UserRepository extends EloquentBaseRepository implements UserRepositoryInt
         parent::__construct($model);
     }
 
-    public function getAllUser(?string $search = "", int $perPage = 10, ?array $ids = null) : LengthAwarePaginator
+    public function getAllUser(?string $search = "", int $perPage = 10, ?array $with = null) : LengthAwarePaginator
     {
-        $query = $this->model->newModelQuery();
+        $query = $this->model->newModelQuery()->with($with);
+        if (!empty($with)) {
+            $query->where(function ($query) use ($with) {
+                return $query->with($with);
+            });
+        }
+
         if (!empty($search)) {
             $query->where(function ($query) use ($search) {
                 return $query->where('id', $search)

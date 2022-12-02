@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDetail extends Model
+class Location extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_detail';
+    protected $table = 'location';
 
     /**
      * The attributes that are mass assignable.
@@ -18,14 +18,6 @@ class UserDetail extends Model
      */
     protected $fillable
         = [
-            'full_name',
-            'gender',
-            'address',
-            'phone',
-            'user_id',
+            'location_name',
         ];
-
-    public function user() {
-        return $this->belongsTo(User::class, 'id', 'user_id');
-    }
 }

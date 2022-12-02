@@ -17,5 +17,5 @@ interface UserRepositoryInterface
      *
      * @return LengthAwarePaginator
      */
-    public function getAllUser(?string $search = "", int $perPage = 10, ?array $ids = null): LengthAwarePaginator;
+    public function getAllUser(?string $search = "", int $perPage = 10, ?array $with = null): LengthAwarePaginator;
 }

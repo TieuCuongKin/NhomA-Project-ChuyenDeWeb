@@ -19,13 +19,13 @@ class User extends Model
      */
     protected $fillable
         = [
-            'full_name',
-            'gender',
-            'address',
-            'phone',
             'email',
             'password',
             'status',
             'user_type_id'
         ];
+
+    public function userDetail() {
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
+    }
 }

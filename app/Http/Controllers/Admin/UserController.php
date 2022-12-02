@@ -28,7 +28,6 @@ class UserController extends Controller
     public function listUsers()
     {
         $data = $this->managementUserService->getListUsers();
-
         return view('admin.jobseeker.list',['jobseekers' => $data]);
     }
 

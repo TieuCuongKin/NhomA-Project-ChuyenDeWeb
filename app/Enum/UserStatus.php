@@ -1,6 +1,6 @@
 <?php
 
-namespace JobSeeker\Domain\JobSeekerManagement\User\Enum;
+namespace App\Enum;
 
 final class UserStatus
 {

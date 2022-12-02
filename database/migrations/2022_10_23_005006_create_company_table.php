@@ -17,7 +17,6 @@ class CreateCompanyTable extends Migration
             $table->increments('id');
             $table->string('company_name');
             $table->string('company_address');
-            $table->string('company_email');
             $table->string('company_contact');
             $table->string('company_website');
             $table->text('description');
