@@ -24,9 +24,9 @@ class CompanyController extends Controller
         $this->data = [];
     }
 
-    public function index()
+    public function index(?Request $request)
     {
-        $data = $this->companyService->getListCompany();
+        $data = $this->companyService->getListCompany($request?->search);
         return view('admin.company.list',['companies' => $data]);
     }
 
@@ -38,26 +38,31 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $this->data = $this->companyService->createNewCompany($request->all());
+
+        return redirect()->route('admin.company.list');
+
     }
 
-
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $this->data = $this->companyService->getCompanyById($id);
 
-        return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
+        return view('admin.company.detail',['company' => $this->data]);
     }
 
-    public function edit($id): JsonResponse
+    public function edit($id)
     {
         $this->data = $this->companyService->getCompanyById($id);
 
-        return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
+        return view('admin.company.edit',['company' => $this->data]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $response = $this->companyService->updateCompany($id, $request->all());
+        $this->setResponse($response['status'], $response['message'], $response['data']);
+
+        return redirect()->route('admin.company.list');
     }
 
     public function destroy($id): JsonResponse

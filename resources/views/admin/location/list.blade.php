@@ -5,7 +5,14 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">List Location</h1>
+                    <div class="row">
+                        <div class="col-10"><h1>List Location</h1></div>
+                        <div class="col">
+                            <form method="GET" action="{{route('admin.location.add')}}">
+                                <button class="btn btn-primary" type="submit">Add Location +</button>
+                            </form>
+                        </div>
+                    </div>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Location</a></li>
                         <li class="breadcrumb-item active">List</li>

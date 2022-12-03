@@ -8,14 +8,5 @@ use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
-    /**
-     * Get all user
-     *
-     * @param string|null $search
-     * @param int         $perPage
-     * @param array|null  $ids
-     *
-     * @return LengthAwarePaginator
-     */
-    public function getAllUser(?string $search = "", int $perPage = 10, ?array $with = null): LengthAwarePaginator;
+
 }

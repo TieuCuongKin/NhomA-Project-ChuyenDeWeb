@@ -23,4 +23,10 @@ class LocationController extends Controller
         $data = $this->locationService->listLocation();
         return view('admin.location.list', ['locations' => $data]);
     }
+
+    public function store()
+    {
+        $this->locationService->createListLocation();
+        return redirect()->route('admin.location.list');
+    }
 }

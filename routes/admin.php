@@ -31,17 +31,19 @@ Route::group([
             Route::post('/add', 'UserController@store')->name('jobseeker.add');
             Route::get('/show/{id}', 'UserController@show')->name('jobseeker.show');
             Route::get('/edit/{id}', 'UserController@edit')->name('jobseeker.edit');
-            Route::put('/edit/{id}', 'UserController@update')->name('company.edit');
+            Route::put('/edit/{id}', 'UserController@update')->name('jobseeker.edit');
             Route::delete('/delete/{id}', 'UserController@delete')->name('jobseeker.delete');
         });
 
         Route::prefix('location')->group(function (){
             Route::get('/list', 'LocationController@index')->name('location.list');
+            Route::get('/add', 'LocationController@store')->name('location.add');
 
         });
 
         Route::prefix('company')->group(function () {
             Route::get('/list', 'CompanyController@index')->name('company.list');
+            Route::post('/list', 'CompanyController@index')->name('company.list');
             Route::get('/add', 'CompanyController@create')->name('company.add');
             Route::post('/add', 'CompanyController@store')->name('company.add');
             Route::get('/show/{id}', 'CompanyController@show')->name('company.show');

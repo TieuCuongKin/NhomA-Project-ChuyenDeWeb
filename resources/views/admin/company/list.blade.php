@@ -6,7 +6,22 @@
             <main>
                 <div class="container-fluid px-4">
                     <div class="row">
-                        <div class="col-10"><h1>List Companies</h1></div>
+                        <div class="col-4"><h1>List Companies</h1></div>
+                        <div class="col-5">
+                            <!-- Topbar Search -->
+                            <form method="POST" action="{{ route('admin.company.list') }}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                @csrf
+                                <div class="input-group">
+                                    <input name="search" type="text" class="form-control bg-white border-0 small" placeholder="Search for..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="col">
                             <form action="{{route('admin.company.add')}}">
                                 <button class="btn btn-primary" type="submit">Add Company +</button>
@@ -48,18 +63,15 @@
                                                 <td><span class="badge rounded-pill bg-danger">Deactivate</span></td>
                                             @endif
                                             <td class="text-center">
-                                                <button data-url="{{ route('admin.jobseeker.edit',$company['id']) }}"
-                                                        data-target="#edit" data-toggle="modal"
-                                                        class="btn-info btn-edit" type="button">
-                                                    <i class="fa-solid fa-pencil"></i></button>
-                                                <button data-url="{{ route('admin.company.show',$company['id']) }}"
-                                                        data-target="#show" data-toggle="modal"
-                                                        class="btn-success btn-show" type="button">
-                                                    <i class="fa-solid fa-eye"></i></button>
+                                                <a href="{{ route('admin.company.edit',$company['id']) }}"
+                                                   class="btn btn-info btn-edit"><i class="fa-solid fa-edit"></i></a>
+
+                                                <a href="{{ route('admin.company.show',$company['id']) }}"
+                                                   class="btn btn-success btn-show"><i class="fa-solid fa-eye"></i></a>
 
                                                 <button data-url="{{ route('admin.company.delete',$company['id']) }}"
                                                         data-target="#delete" data-toggle="modal"
-                                                        class="btn-danger btn-delete" type="button">
+                                                        class="btn btn-danger btn-delete" type="button">
                                                     <i class="fa-solid fa-trash"></i></button>
                                             </td>
                                         </tr>
@@ -70,35 +82,12 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.company.edit')
-                    @include('admin.company.detail')
 
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"
                             type="text/javascript" charset="utf-8" async defer></script>
                     <script type="text/javascript">
                         $(document).ready(function () {
-                            $('.btn-show').click(function(){
-                                console.log('hi');
-                                var url = $(this).attr('data-url');
-                                $('#modal-show').modal('show');
-                                $.ajax({
-                                    type: 'get',
-                                    url: url,
-                                    success: function(response) {
-                                        console.log(response)
-                                        $('p#id').text(response.data.id)
-                                        $('p#fullname').text(response.data.full_name)
-                                        $('p#gender').text(response.data.gender)
-                                        $('p#phone').text(response.data.phone)
-                                        $('p#address').text(response.data.address)
-                                        $('p#status').text(response.data.status)
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-
-                                    }
-                                })
-                            })
                             $('.btn-delete').click(function(){
                                 var url = $(this).attr('data-url');
                                 var _this = $(this);
@@ -118,56 +107,6 @@
                                         }
                                     })
                                 }
-                            })
-                            $('.btn-edit').click(function (e) {
-                                var url = $(this).attr('data-url');
-                                $('#modal-edit').modal('show');
-                                e.preventDefault();
-                                $.ajax({
-                                    //phương thức get
-                                    type: 'get',
-                                    url: url,
-                                    success: function (response) {
-                                        //đưa dữ liệu controller gửi về điền vào input trong form edit.
-                                        $('#email-edit').val(response.data.email);
-                                        $('#fullname-edit').val(response.data.full_name);
-                                        $('#gender-edit').val(response.data.gender);
-                                        $('#phone-edit').val(response.data.phone);
-                                        $('#address-edit').val(response.data.address);
-                                        $('#status-edit').val(response.data.status);
-
-                                        //thêm data-url chứa route sửa todo đã được chỉ định vào form sửa.
-                                        $('#form-edit').attr('data-url', '{{ asset('/admin/user/edit') }}/'+ response.data.id);
-                                    },
-                                    error: function (error) {
-
-                                    }
-                                })
-                            })
-                            $('#form-edit').submit(function (e) {
-                                e.preventDefault();
-                                var url = $(this).attr('data-url');
-                                $.ajax({
-                                    type: 'put',
-                                    url: url,
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    data: {
-                                        email: $('#email-edit').val(),
-                                        fullname: $('#fullname-edit').val(),
-                                        gender: $('#gender-edit').val(),
-                                        phone: $('#phone-edit').val(),
-                                        address: $('#address-edit').val(),
-                                        status: $('#status-edit').val(),
-                                    },
-                                    success: function (response) {
-                                        window.location.reload();
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-
-                                    }
-                                })
                             })
                         })
                     </script>

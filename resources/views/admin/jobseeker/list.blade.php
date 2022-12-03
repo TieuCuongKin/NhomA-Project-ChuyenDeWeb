@@ -40,15 +40,15 @@
                                     @foreach($jobseekers as $jobseeker)
                                         <tr>
                                             <td>{{ $jobseeker->id }}</td>
-                                            <td>{{ $jobseeker->userDetail->full_name }}</td>
-                                            @if( $jobseeker->userDetail->gender == 0)
+                                            <td>{{ $jobseeker->full_name }}</td>
+                                            @if( $jobseeker->gender == 0)
                                                 <td>Male</td>
                                             @else
                                                 <td>Female</td>
                                             @endif
-                                            <td>{{ $jobseeker->userDetail->phone }}</td>
-                                            <td>{{ $jobseeker->email }}</td>
-                                            @if( $jobseeker->status == 1)
+                                            <td>{{ $jobseeker->phone }}</td>
+                                            <td>{{ $jobseeker->user->email }}</td>
+                                            @if( $jobseeker->user->status == 1)
                                                 <td><span class="badge rounded-pill bg-success">Active</span></td>
                                             @else
                                                 <td><span class="badge rounded-pill bg-danger">Deactivate</span></td>

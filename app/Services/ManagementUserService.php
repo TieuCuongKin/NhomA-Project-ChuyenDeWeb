@@ -48,7 +48,7 @@ class ManagementUserService
 
     public function getListUsers(?string $search = "", int $perPage = 10)
     {
-        return $this->userRepository->getAllUser($search, $perPage, ['userDetail']);
+        return $this->userDetailRepository->getAllUser($search, $perPage, ['userDetail']);
     }
 
     /**
@@ -88,16 +88,16 @@ class ManagementUserService
      */
     public function getUserById(int $id): array
     {
-        $user = $this->userRepository->findById($id, ['userDetail']);
+        $user = $this->userDetailRepository->findById($id, ['user']);
         if (!$user) throw new Exception('User not found');
 
         $this->data['id'] = $user->id;
-        $this->data['full_name'] = $user->userDetail->full_name;
-        $this->data['gender'] = $user->userDetail->gender;
-        $this->data['email'] = $user->email;
-        $this->data['phone'] = $user->userDetail->phone;
-        $this->data['address'] = $user->userDetail->address;
-        $this->data['status'] = $user->status;
+        $this->data['full_name'] = $user->full_name;
+        $this->data['gender'] = $user->gender;
+        $this->data['email'] = $user->user->email;
+        $this->data['phone'] = $user->phone;
+        $this->data['address'] = $user->address;
+        $this->data['status'] = $user->user->status;
 
         return $this->data;
     }
@@ -108,33 +108,32 @@ class ManagementUserService
     public function updateUser(int $id, array $param): array
     {
         DB::beginTransaction();
-        $user = $this->userRepository->findById($id, ['userDetail']);
-        if (!$user) {
+        $userDetail = $this->userDetailRepository->findById($id, ['user']);
+        if (!$userDetail) {
             $this->status = Response::HTTP_NOT_FOUND;
             $this->message = __('api_messages.user.not_found');
 
             return $this->handleApiResponse();
         }
-
         try {
             $userData = [
                 'email' => $param['email'],
                 'status' => $param['status'],
             ];
-            $this->userRepository->update($id, $userData);
+            $this->userRepository->update($userDetail->user->id, $userData);
             $userDetailData = [
                 'full_name' => $param['fullname'],
                 'gender' => $param['gender'],
                 'address' => $param['address'],
                 'phone' => $param['phone'],
             ];
-            $this->userDetailRepository->update($user->userDetail->id, $userDetailData);
+            $this->userDetailRepository->update($id, $userDetailData);
 
             $this->message = __('api_messages.user.successfully_updated');
             DB::commit();
         } catch (Throwable $exception) {
             DB::rollBack();
-            throw new Exception(__('api_messages.failed'));
+            throw new $exception;
         }
 
         return $this->handleApiResponse();
@@ -146,8 +145,8 @@ class ManagementUserService
     public function deleteUserAccount(int $id): array
     {
         DB::beginTransaction();
-        $userDomainModel = $this->userRepository->findById($id, ['userDetail']);
-        if (!$userDomainModel) {
+        $userDetail = $this->userRepository->findById($id, ['user']);
+        if (!$userDetail) {
             $this->status = Response::HTTP_NOT_FOUND;
             $this->message = __('api_messages.user.not_found');
 
@@ -155,8 +154,8 @@ class ManagementUserService
         }
 
         try {
-            $this->userDetailRepository->delete($userDomainModel->userDetail->id);
-            $this->userRepository->delete($id);
+            $this->userDetailRepository->delete($id);
+            $this->userRepository->delete($userDetail->user->id);
             $this->message = __('api_messages.user.successfully_delete');
             DB::commit();
         } catch (Throwable $exception) {

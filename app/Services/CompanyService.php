@@ -96,16 +96,56 @@ class CompanyService
     {
         $company = $this->companyRepository->findById($id, ['user']);
         if (!$company) throw new Exception('Company not found');
-        dd($company);
-        $this->data['id'] = $company->id;
-        $this->data['company_name'] = $company->userDetail->full_name;
-        $this->data['gender'] = $company->userDetail->gender;
-        $this->data['email'] = $company->email;
-        $this->data['phone'] = $company->userDetail->phone;
-        $this->data['address'] = $company->userDetail->address;
-        $this->data['status'] = $company->user->status;
+        $this->data['id'] = $id;
+        $this->data['email'] = $company->user->email;
+        $this->data['user_id'] = $company->user_id;
+        $this->data['company_name'] = $company->company_name;
+        $this->data['company_address'] = $company->company_address;
+        $this->data['company_contact'] = $company->company_contact;
+        $this->data['company_website'] = $company->company_website;
+        $this->data['description'] = $company->description;
+        $this->data['image'] = $company->image;
 
         return $this->data;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function updateCompany(int $id, array $param): array
+    {
+        DB::beginTransaction();
+        $company = $this->companyRepository->findById($id, ['user']);
+        if (!$company) {
+            $this->status = Response::HTTP_NOT_FOUND;
+            $this->message = __('api_messages.user.not_found');
+
+            return $this->handleApiResponse();
+        }
+        try {
+            $userData = [
+                'email' => $param['email'],
+                'status' => $param['status'],
+            ];
+            $this->userRepository->update($company->user->id, $userData);
+            $companyData = [
+                'company_name' => $param['companyName'],
+                'company_address' => $param['companyAddress'],
+                'company_contact' => $param['companyContact'],
+                'company_website' => $param['companyWebsite'],
+                'description' => $param['companyDescription'],
+                'image' => $param['thumb'],
+            ];
+            $this->companyRepository->update($id, $companyData);
+
+            $this->message = __('api_messages.user.successfully_updated');
+            DB::commit();
+        } catch (Throwable $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return $this->handleApiResponse();
     }
 
     /**
