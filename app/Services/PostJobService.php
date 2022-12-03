@@ -20,5 +20,4 @@ class PostJobService
      */
     private array $data = [];
 
-
 }

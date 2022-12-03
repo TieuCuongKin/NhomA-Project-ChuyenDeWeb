@@ -7,24 +7,13 @@ use App\Enum\UserType;
 use App\Repositories\CompanyRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use Exception;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Session;
 use Throwable;
 
 class CompanyService
 {
-    /**
-     * @var int
-     */
-
-    private int $status;
-
-    /**
-     * @var string
-     */
-    private string $message;
-
     /*
      * @var array
      */
@@ -45,8 +34,6 @@ class CompanyService
         $this->userRepository = $userRepository;
         $this->companyRepository = $companyRepository;
 
-        $this->status = Response::HTTP_OK;
-        $this->message = __('api_messages.successful');
         $this->data = [];
     }
 
@@ -58,7 +45,7 @@ class CompanyService
     /**
      * @throws Exception
      */
-    public function createNewCompany($param): array
+    public function createNewCompany($param): bool
     {
         DB::beginTransaction();
         try {
@@ -79,14 +66,15 @@ class CompanyService
                 'image' => $param['thumb'],
             ];
             $this->companyRepository->create($companyData);
-            $this->message = __('api_messages.user.successfully_updated');
+            Session::flash('success', 'Create company success');
+
             DB::commit();
+            return true;
         } catch (Throwable $exception) {
             DB::rollBack();
-            throw $exception;
+            Session::flash('error', $exception->getMessage());
         }
-
-        return $this->handleApiResponse();
+        return false;
     }
 
     /**
@@ -95,7 +83,9 @@ class CompanyService
     public function getCompanyById(int $id): array
     {
         $company = $this->companyRepository->findById($id, ['user']);
-        if (!$company) throw new Exception('Company not found');
+        if (!$company) {
+            return Session::flash('error', 'Company Not Found');
+        }
         $this->data['id'] = $id;
         $this->data['email'] = $company->user->email;
         $this->data['user_id'] = $company->user_id;
@@ -112,15 +102,13 @@ class CompanyService
     /**
      * @throws Exception
      */
-    public function updateCompany(int $id, array $param): array
+    public function updateCompany(int $id, array $param): bool
     {
         DB::beginTransaction();
         $company = $this->companyRepository->findById($id, ['user']);
         if (!$company) {
-            $this->status = Response::HTTP_NOT_FOUND;
-            $this->message = __('api_messages.user.not_found');
-
-            return $this->handleApiResponse();
+            Session::flash('error', 'Company Not Found');
+            return false;
         }
         try {
             $userData = [
@@ -137,54 +125,40 @@ class CompanyService
                 'image' => $param['thumb'],
             ];
             $this->companyRepository->update($id, $companyData);
+            Session::flash('success', 'Update Company Success');
 
-            $this->message = __('api_messages.user.successfully_updated');
             DB::commit();
+            return true;
         } catch (Throwable $exception) {
             DB::rollBack();
-            throw $exception;
+            Session::flash('error', $exception->getMessage());
         }
-
-        return $this->handleApiResponse();
+        return false;
     }
 
     /**
      * @throws Exception
      */
-    public function deleteCompanyAccount(int $id): array
+    public function deleteCompanyAccount(int $id): bool
     {
         DB::beginTransaction();
         $company = $this->companyRepository->findById($id, ['user']);
         if (!$company) {
-            $this->status = Response::HTTP_NOT_FOUND;
-            $this->message = __('api_messages.user.not_found');
-
-            return $this->handleApiResponse();
+            Session::flash('success', 'Company Not Found');
+            return false;
         }
 
         try {
             $this->companyRepository->delete($id);
             $this->userRepository->delete($company->user->id);
-            $this->message = __('api_messages.user.successfully_delete');
+            Session::flash('success', 'Company Delete Success');
+
             DB::commit();
+            return true;
         } catch (Throwable $exception) {
             DB::rollBack();
-            throw new Exception(__('api_messages.failed'));
+            Session::flash('error', $exception->getMessage());
         }
-        return $this->handleApiResponse();
-    }
-
-    /**
-     * Format data
-     *
-     * @return array
-     */
-    public function handleApiResponse(): array
-    {
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data
-        ];
+        return false;
     }
 }

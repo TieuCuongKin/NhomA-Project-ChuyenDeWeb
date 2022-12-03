@@ -57,7 +57,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.jobseeker.list') }}">
+            <a class="nav-link collapsed" href="{{ route('admin.jobseeker.index') }}">
                 <i class="fa-solid fa-user"></i>
                 <span> JobSeeker</span>
             </a>
@@ -98,7 +98,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="utilities-color.html">List Job</a>
-                    <a class="collapse-item" href="utilities-border.html">Post Job</a>
+                    <a class="collapse-item" href="{{ route('admin.postjob.add') }}">Post Job</a>
                 </div>
             </div>
         </li>

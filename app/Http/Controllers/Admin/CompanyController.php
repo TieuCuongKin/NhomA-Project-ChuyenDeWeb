@@ -19,9 +19,6 @@ class CompanyController extends Controller
     public function __construct(CompanyService $companyService)
     {
         $this->companyService = $companyService;
-        $this->status = Response::HTTP_OK;;
-        $this->message = __('api_messages.successful');
-        $this->data = [];
     }
 
     public function index(?Request $request)
@@ -37,7 +34,7 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-        $this->data = $this->companyService->createNewCompany($request->all());
+        $this->companyService->createNewCompany($request->all());
 
         return redirect()->route('admin.company.list');
 
@@ -45,45 +42,32 @@ class CompanyController extends Controller
 
     public function show($id)
     {
-        $this->data = $this->companyService->getCompanyById($id);
+        $data = $this->companyService->getCompanyById($id);
 
-        return view('admin.company.detail',['company' => $this->data]);
+        return view('admin.company.detail',['company' => $data]);
     }
 
     public function edit($id)
     {
-        $this->data = $this->companyService->getCompanyById($id);
+        $data = $this->companyService->getCompanyById($id);
 
-        return view('admin.company.edit',['company' => $this->data]);
+        return view('admin.company.edit',['company' => $data]);
     }
 
     public function update(Request $request, $id)
     {
-        $response = $this->companyService->updateCompany($id, $request->all());
-        $this->setResponse($response['status'], $response['message'], $response['data']);
+        $this->companyService->updateCompany($id, $request->all());
 
         return redirect()->route('admin.company.list');
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy($id)
     {
-        $response = $this->companyService->deleteCompanyAccount($id);
-        $this->setResponse($response['status'], $response['message'], $response['data']);
+        if($this->companyService->deleteCompanyAccount($id))
+        {
+            return redirect()->route('admin.company.list');
+        }
 
-        return ApiResponseHandler::jsonResponse($this->status, $this->message, $this->data);
-    }
-
-    /**
-     * Set response for the controller
-     *
-     * @param int $status
-     * @param string $message
-     * @param array $data
-     */
-    public function setResponse(int $status, string $message, array $data)
-    {
-        $this->status = $status;
-        $this->message = $message;
-        $this->data = $data;
+        return redirect()->back();
     }
 }

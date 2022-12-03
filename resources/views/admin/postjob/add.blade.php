@@ -4,9 +4,9 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Add JobSeeker</h1>
+                    <h1 class="mt-4">Post A New Job On Website</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">JobSeeker</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Post Job</a></li>
                         <li class="breadcrumb-item active">Add</li>
                     </ol>
                 </div>
@@ -15,32 +15,63 @@
                     <form id="form-edit" method="POST" role="form" action="{{ route('admin.jobseeker.add') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                                   aria-describedby="emailHelp">
+                            <label for="exampleInputTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="exampleInputTitle" name="title">
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Company</label>
+                                    <select name="company" id="company" class="form-control" required="required">
+                                        @foreach($companies as $company)
+                                            <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="job_location_id">Location</label>
+                                    <select name="job_location_id" id="job_location_id" class="form-control" required="required">
+                                        @foreach($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->location_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="exampleInputSalaryMin" class="form-label">Salary Min</label>
+                                    <input type="number" class="form-control" id="exampleInputSalaryMin" name="salary_min">
+                                </div>
+                                <div class="col-2">
+                                    <label for="exampleInputSalaryMax" class="form-label">Salary Max</label>
+                                    <input type="number" class="form-control" id="exampleInputSalaryMax" name="salary_max">
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                            <div class="mb-3">
+                                <label for="exampleDescription" class="form-label">Job Description</label>
+                                <textarea id="summernote" name="job_description"></textarea>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFullName" class="form-label">Full name</label>
-                            <input type="text" class="form-control" id="exampleInputFullName" name="fullname">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Gender</label>
-                            <select name="gender" id="gender-edit" class="form-control" required="required">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
+                            <label for="exampleExpiry" class="form-label">Job Expired</label>
+                            <input type="date" class="form-control" id="exampleExpiry" name="job_expiry">
                         </div>
                         <div class="mb-3">
-                            <label for="examplePhone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="exampleInputPhone" name="phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="exampleInputAddress" name="address">
+                            <div class="form-group">
+                                <label for="">Status</label>
+                                <select name="status" id="status-edit" class="form-control" required="required">
+                                    <option value="1">Active</option>
+                                    <option value="2">Deactivate</option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

@@ -26,9 +26,9 @@ class UserController extends Controller
         $this->data = [];
     }
 
-    public function listUsers()
+    public function index(?Request $request)
     {
-        $data = $this->managementUserService->getListUsers();
+        $data = $this->managementUserService->getListUsers($request?->search);
         return view('admin.jobseeker.list',['jobseekers' => $data]);
     }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $this->data = $this->managementUserService->createNewUser($request->all());
 
-        return redirect()->route('admin.jobseeker.list');
+        return redirect()->route('admin.jobseeker.index');
     }
 
     /**

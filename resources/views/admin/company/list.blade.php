@@ -7,7 +7,7 @@
                 <div class="container-fluid px-4">
                     <div class="row">
                         <div class="col-4"><h1>List Companies</h1></div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <!-- Topbar Search -->
                             <form method="POST" action="{{ route('admin.company.list') }}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                 @csrf
@@ -35,6 +35,7 @@
                 </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    @include('layout.alert')
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -47,7 +48,7 @@
                                         <th width="20%">Company Name</th>
                                         <th>Company Contact</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th width="20%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -63,16 +64,22 @@
                                                 <td><span class="badge rounded-pill bg-danger">Deactivate</span></td>
                                             @endif
                                             <td class="text-center">
-                                                <a href="{{ route('admin.company.edit',$company['id']) }}"
-                                                   class="btn btn-info btn-edit"><i class="fa-solid fa-edit"></i></a>
+                                                <form action="{{ route('admin.company.delete', $company['id']) }}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="{{ route('admin.company.edit',$company['id']) }}"
+                                                       class="btn btn-info btn-edit"><i
+                                                                class="fa-solid fa-edit"></i></a>
 
-                                                <a href="{{ route('admin.company.show',$company['id']) }}"
-                                                   class="btn btn-success btn-show"><i class="fa-solid fa-eye"></i></a>
+                                                    <a href="{{ route('admin.company.show',$company['id']) }}"
+                                                       class="btn btn-success btn-show"><i class="fa-solid fa-eye"></i></a>
 
-                                                <button data-url="{{ route('admin.company.delete',$company['id']) }}"
-                                                        data-target="#delete" data-toggle="modal"
-                                                        class="btn btn-danger btn-delete" type="button">
-                                                    <i class="fa-solid fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-delete"
+                                                            onclick="return confirm('Are you sure to delete?')">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -82,34 +89,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"
-                            type="text/javascript" charset="utf-8" async defer></script>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('.btn-delete').click(function(){
-                                var url = $(this).attr('data-url');
-                                var _this = $(this);
-                                if (confirm('Are you sure to delete?')) {
-                                    $.ajax({
-                                        type: 'delete',
-                                        url: url,
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        },
-                                        success: function(response) {
-                                            toastr.success('Delete company success!')
-                                            window.location.reload();
-                                        },
-                                        error: function (jqXHR, textStatus, errorThrown) {
-
-                                        }
-                                    })
-                                }
-                            })
-                        })
-                    </script>
                     <!-- /.container-fluid -->
                 </div>
             </main>

@@ -26,7 +26,8 @@ Route::group([
         Route::get('/dashboard','AdminController@index')->name('index');
 
         Route::prefix('user')->group(function () {
-            Route::get('/list', 'UserController@listUsers')->name('jobseeker.list');
+            Route::get('/list', 'UserController@index')->name('jobseeker.index');
+            Route::post('/list', 'UserController@index')->name('jobseeker.index');
             Route::get('/add', 'UserController@create')->name('jobseeker.add');
             Route::post('/add', 'UserController@store')->name('jobseeker.add');
             Route::get('/show/{id}', 'UserController@show')->name('jobseeker.show');
@@ -50,6 +51,17 @@ Route::group([
             Route::get('/edit/{id}', 'CompanyController@edit')->name('company.edit');
             Route::put('/edit/{id}', 'CompanyController@update')->name('company.edit');
             Route::delete('/delete/{id}', 'CompanyController@destroy')->name('company.delete');
+        });
+
+        Route::prefix('postjob')->group(function () {
+            Route::get('/list', 'PostJobController@index')->name('postjob.index');
+            Route::post('/list', 'PostJobController@index')->name('postjob.index');
+            Route::get('/add', 'PostJobController@create')->name('postjob.add');
+            Route::post('/add', 'PostJobController@store')->name('postjob.add');
+            Route::get('/show/{id}', 'PostJobController@show')->name('postjob.show');
+            Route::get('/edit/{id}', 'PostJobController@edit')->name('postjob.edit');
+            Route::put('/edit/{id}', 'PostJobController@update')->name('postjob.edit');
+            Route::delete('/delete/{id}', 'PostJobController@destroy')->name('postjob.delete');
         });
 
         Route::prefix('upload')->group(function () {

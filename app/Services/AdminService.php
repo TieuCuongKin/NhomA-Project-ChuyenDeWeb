@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\AdminRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminService
 {
@@ -21,8 +22,10 @@ class AdminService
             'password' => $request['password']
         ];
         if(Auth::guard('admin')->attempt($params)) {
+            Session::flash('success', 'Login successfully');
             return true;
         }
+        Session::flash('error', 'Wrong account or password');
         return false;
     }
 
