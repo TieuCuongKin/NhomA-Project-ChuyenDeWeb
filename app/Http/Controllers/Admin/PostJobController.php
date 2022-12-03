@@ -38,11 +38,12 @@ class PostJobController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(?Request $request)
     {
-        //
+        $data = $this->postJobService->getListJobs($request?->search);
+
+        return view('admin.postjob.list', ['jobs' => $data]);
     }
 
     /**
@@ -56,59 +57,43 @@ class PostJobController extends Controller
         return view('admin.postjob.add', ['companies' => $companies, 'locations' => $locations] );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->postJobService->createNewJob($request->all());
+
+        return redirect()->route('admin.postjob.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $data = $this->postJobService->getJobById($id);
+
+        return view('admin.postjob.detail',['job' => $data]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $companies = $this->companyRepository->getAll();
+        $locations = $this->locationRepository->getAll();
+        $data = $this->postJobService->getJobById($id);
+
+        return view('admin.postjob.edit',['companies' => $companies, 'locations' => $locations, 'job' => $data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->postJobService->updateJob($id, $request->all());
+
+        return redirect()->route('admin.postjob.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        if($this->postJobService->deleteJob($id))
+        {
+            return redirect()->route('admin.company.list');
+        }
+
+        return redirect()->back();
     }
 }

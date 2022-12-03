@@ -145,7 +145,7 @@ class ManagementUserService
     public function deleteUserAccount(int $id): array
     {
         DB::beginTransaction();
-        $userDetail = $this->userRepository->findById($id, ['user']);
+        $userDetail = $this->userDetailRepository->findById($id, ['user']);
         if (!$userDetail) {
             $this->status = Response::HTTP_NOT_FOUND;
             $this->message = __('api_messages.user.not_found');

@@ -97,7 +97,7 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">List Job</a>
+                    <a class="collapse-item" href="{{ route('admin.postjob.index') }}">List Job</a>
                     <a class="collapse-item" href="{{ route('admin.postjob.add') }}">Post Job</a>
                 </div>
             </div>

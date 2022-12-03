@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\ResponseHandler\ApiResponseHandler;
+use App\Repositories\CompanyRepositoryInterface;
+use App\Repositories\LocationRepositoryInterface;
+use App\Repositories\UserDetailRepositoryInterface;
 use App\Services\CompanyService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 
 class CompanyController extends Controller
 {
@@ -19,6 +19,7 @@ class CompanyController extends Controller
     public function __construct(CompanyService $companyService)
     {
         $this->companyService = $companyService;
+
     }
 
     public function index(?Request $request)

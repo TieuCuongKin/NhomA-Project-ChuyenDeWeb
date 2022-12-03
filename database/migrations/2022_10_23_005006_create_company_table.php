@@ -15,6 +15,7 @@ class CreateCompanyTable extends Migration
     {
         Schema::create('company', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('company_name');
             $table->string('company_address');
             $table->string('company_contact');
@@ -22,6 +23,7 @@ class CreateCompanyTable extends Migration
             $table->text('description');
             $table->string('image');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

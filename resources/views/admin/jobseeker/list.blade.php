@@ -63,8 +63,8 @@
                                                 <td>Female</td>
                                             @endif
                                             <td>{{ $jobseeker->phone }}</td>
-                                            <td>{{ $jobseeker->user->email }}</td>
-                                            @if( $jobseeker->user->status == 1)
+                                            <td>{{ $jobseeker->user?->email }}</td>
+                                            @if( $jobseeker->user?->status == 1)
                                                 <td><span class="badge rounded-pill bg-success">Active</span></td>
                                             @else
                                                 <td><span class="badge rounded-pill bg-danger">Deactivate</span></td>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Repositories\CompanyRepositoryInterface;
+use App\Repositories\LocationRepositoryInterface;
+use App\Repositories\UserDetailRepositoryInterface;
 use App\Services\AdminService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -12,12 +15,25 @@ class AdminController extends Controller
 {
     protected AdminService $adminService;
 
+    private UserDetailRepositoryInterface $userDetailRepository;
+
+    private CompanyRepositoryInterface $companyRepository;
+
+    private LocationRepositoryInterface $locationRepository;
+
     /**
      * @param AdminService $adminService
      */
-    public function __construct(AdminService $adminService)
-    {
+    public function __construct(
+        AdminService $adminService,
+        UserDetailRepositoryInterface $userDetailRepository,
+        CompanyRepositoryInterface $companyRepository,
+        LocationRepositoryInterface $locationRepository
+    ) {
         $this->adminService = $adminService;
+        $this->userDetailRepository = $userDetailRepository;
+        $this->companyRepository = $companyRepository;
+        $this->locationRepository = $locationRepository;
     }
 
     public function loginPage()
@@ -43,6 +59,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $companies = $this->companyRepository->getAll()->count();
+        $locations = $this->locationRepository->getAll()->count();
+        $jobseekers = $this->userDetailRepository->getAll()->count();
+
+        return view('admin.index', [
+            'companies' => $companies,
+            'locations' => $locations,
+            'jobseekers' => $jobseekers
+        ]);
     }
 }

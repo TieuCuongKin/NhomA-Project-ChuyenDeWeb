@@ -12,19 +12,21 @@
                 </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <form id="form-edit" method="POST" role="form" action="{{ route('admin.postjob.add') }}">
+                    <form id="form-edit" method="POST" role="form" action="{{ route('admin.postjob.edit', $job['id']) }}">
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
                             <label for="exampleInputTitle" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="exampleInputTitle" name="title">
+                            <input type="text" class="form-control" id="exampleInputTitle" name="title" value="{{ $job['job_title'] }}">
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Company</label>
-                                    <select name="company" id="company" class="form-control" required="required">
-                                        @foreach($companies as $company)
+                                    <select name="company" id="company" class="form-control" required="required" value="{{ $job['company_id'] }}">
+                                        <option value="{{ $job['company_id'] }}" selected="selected">{{ $job['company_name'] }}</option>
+                                    @foreach($companies as $company)
                                             <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                                         @endforeach
                                     </select>
@@ -33,7 +35,8 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="job_location_id">Location</label>
-                                    <select name="job_location_id" id="job_location_id" class="form-control" required="required">
+                                    <select name="job_location_id" id="job_location_id" class="form-control" required="required"  >
+                                        <option value="{{ $job['job_location_id'] }}" selected="selected">{{ $job['job_location'] }}</option>
                                         @foreach($locations as $location)
                                             <option value="{{ $location->id }}">{{ $location->location_name }}</option>
                                         @endforeach
@@ -46,23 +49,23 @@
                             <div class="row">
                                 <div class="col-2">
                                     <label for="exampleInputSalaryMin" class="form-label">Salary Min</label>
-                                    <input type="number" class="form-control" id="exampleInputSalaryMin" name="salary_min">
+                                    <input type="number" class="form-control" id="exampleInputSalaryMin" name="salary_min" value="{{ $job['job_salary_min'] }}">
                                 </div>
                                 <div class="col-2">
                                     <label for="exampleInputSalaryMax" class="form-label">Salary Max</label>
-                                    <input type="number" class="form-control" id="exampleInputSalaryMax" name="salary_max">
+                                    <input type="number" class="form-control" id="exampleInputSalaryMax" name="salary_max" value="{{ $job['job_salary_max'] }}">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="mb-3">
                                 <label for="exampleDescription" class="form-label">Job Description</label>
-                                <textarea id="summernote" name="job_description"></textarea>
+                                <textarea id="summernote" name="job_description"><?php echo $job['job_description'] ?> </textarea>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleExpiry" class="form-label">Job Expired</label>
-                            <input type="date" class="form-control" id="exampleExpiry" name="job_expiry">
+                            <input type="date" class="form-control" id="exampleExpiry" name="job_expiry" value="{{ $job['job_expired_at'] }}">
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
