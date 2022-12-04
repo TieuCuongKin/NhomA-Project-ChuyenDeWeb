@@ -8,10 +8,10 @@
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="breadcrumb-header">Cart</h3>
+				<h3 class="breadcrumb-header">Apply Jobs</h3>
 				<ul class="breadcrumb-tree">
 					<li><a href="{{ url('/') }}">Home</a></li>
-					<li class="active">Cart</li>
+					<li class="active">Jobs</li>
 				</ul>
 			</div>
 		</div>
@@ -28,85 +28,67 @@
 			<div class="col col-md-12">
 				<table class="table table-bordered">
 					<thead>
-						<tr>
-							<th style="text-align: center; vertical-align: middle">STT</th>
-							<th style="text-align: center; vertical-align: middle">Image</th>
-							<th style="text-align: center; vertical-align: middle">Product Name</th>
-							<th style="text-align: center; vertical-align: middle">Quantity</th>
-							<th style="text-align: center; vertical-align: middle">Price</th>
-							<th style="text-align: center; vertical-align: middle">Into Money</th>
-							<th style="text-align: center; vertical-align: middle">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$stt = 1;
-						$total = 0;
-						foreach ($allproducts as $value) {
-							if (session()->has('carts' . $value->product_id)) { ?>
-								<tr>
-									<td style="text-align: center; vertical-align: middle">
-										<?php echo $stt;
-										$stt++ ?>
-									</td>
-									<td style="text-align: center; padding-left: 25px">
-										<div class="product-widget">
-											<div class="product-img">
-												<a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">
-													<img src="{{ asset('img/'.$value->image) }}" alt="">
-												</a>
+						<div id='container'>
+							<div class='hidden-xs' data-action='click-&gt;scroll-top#scrollToTop' data-controller='scroll-top' id='scrolltop'>
+								<div class='top-arrow'></div>
+							</div>
+							<div class='job_application main-content'>
+								<div class='content clearfix'>
+									<div class='header col-12'>
+										<h3>Lead/Senior Android Engineer (Kotlin) - Sign on-bonus at NAB Innovation Centre Vietnam</h3>
+									</div>
+									<div class='apply-form'>
+										<div class='form-content'>
+											<form class="info col-md-12 px-3" id="apply_form" data-controller="job-applications--new bootstrap-validation" data-bootstrap-validation-highlight-value="false" enctype="multipart/form-data" action="/job/lead-senior-android-engineer-kotlin-sign-on-bonus-nab-innovation-centre-vietnam-0104/job_applications" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="kLH6UxUIPWYfAvtDYYG6XXlke5Dh-J9ex3HYZvLU0mL7j4t2FeRqlntDflIZLlmphtbvqg7xoNRaAwm39r0W-Q" autocomplete="off" /><input autocomplete="off" type="hidden" name="job_application[source]" id="job_application_source" />
+												
+												<div class='row mb-3'>
+													<label class="col-sm-2" for="job_application_fullname">Your name:</label>
+													<div class='col-sm-10'>
+														<input maxlength="65" placeholder="Enter your full name" value="K Ha" data-rule-presence="true" data-msg-presence="Can&#39;t be blank" data-job-applications--new-target="name" size="65" type="text" name="job_application[fullname]" id="job_application_fullname" />
+													</div>
+												</div>
+												<div class='row mb-3'>
+													<label class="col-sm-2" for="job_application_cv_local">Your CV:</label>
+													<div class='col-sm-10'>
+														<input class="cv_input_field_field" required="required" accept="application/msword,application/pdf,application/x-ole-storage,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-rule-filesize="3145728" data-msg-filesize="limit 3MB" data-rule-minfilesize="1" data-msg-minfilesize="Your CV is empty. Please try again!" data-rule-accept="application/msword,application/pdf,application/x-ole-storage,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-msg-accept="Oops! Please attach a .doc .docx .pdf file" data-msg="Can&#39;t be blank" data-job-applications--new-target="fileField" data-action="change-&gt;job-applications--new#uploadNewCv" type="file" name="job_application[cv_local]" id="job_application_cv_local" />
+														<div class='small form-text'>We accept .doc .docx, .pdf files, no password protected, up to 3MB</div>
+													</div>
+												</div>
+												<div class='row mb-3 job_application_advantages' data-char-counter-max-length-value='500' data-controller='char-counter'>
+													<label class="text" for="job_application_advantages">What skills, work projects or achievements make you a strong candidate?</label>
+													<div class='col-sm-12'>
+														<textarea placeholder="Details and specific examples will make your application stronger..." data-rule-maxlength="500" data-msg-maxlength="" data-char-counter-target="input" class="form-control" rows="3" name="job_application[advantages]" id="job_application_advantages"></textarea>
+													</div>
+													<div class='form-text text-end' data-char-counter-target='display'></div>
+												</div>
+												<div class='actions d-grid mb-4'>
+													<button class='btn-block send_now button-red' data-disable-with='Saving...' type='submit'>Send my CV</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class='modal fade swal-popup' id='form-errors-modal' role='dialog' tabindex='-1'>
+									<div class='modal-dialog' role='document'>
+										<div class='modal-content'>
+											<div class='modal-body text-center'>
+												<button class='close modal-body__close swal2-close' data-bs-dismiss='modal' type='button'>×</button>
+												<div class='swal2-title'>
+													Oops! Something&#39;s not right.
+												</div>
+												<div class='swal2-html-container'>
+													Go back and check for <i class='fa red fa-times'></i> fields.
+												</div>
+												<div class='swal2-actions'>
+													<button class='swal2-red-btn' data-bs-dismiss='modal' type='button'>
+														Go back
+													</button>
+													-->
+												</div>
 											</div>
 										</div>
-									</td>
-									<td style="text-align: center; vertical-align: middle">{{ $value->product_name }}</td>
-									<td style="text-align: center; vertical-align: middle">
-										<div style="text-align: center;">
-											{{ session()->get('carts' . $value->product_id) }}<br>
-											<a class="btn btn-danger " href="{{ url('/carts/+/'.$value->product_id) }}" class="plus">+</a>
-											<a class="btn btn-danger " href="{{ url('/carts/-/'.$value->product_id) }}" class="plus">-</a>
-										</div>
-									</td>
-									<td style="text-align: center; vertical-align: middle">
-										<?php if ($value->sale > 0) {
-											echo number_format($value->price - ($value->price * $value->sale / 100)) . "đ ";
-										} else {
-											echo number_format($value->price) . "đ";
-										} ?>
-									</td>
-									<td style="text-align: center; vertical-align: middle">
-										<?php if ($value->sale > 0) {
-											$total += ($value->price - ($value->price * $value->sale / 100)) * session()->get('carts' . $value->product_id);
-											echo number_format(($value->price - ($value->price * $value->sale / 100)) * session()->get('carts' . $value->product_id)). "đ ";
-										} else {
-											$total += ($value->price * session()->get('carts' . $value->product_id));
-											echo number_format($value->price * session()->get('carts' . $value->product_id)) . "đ";
-										} ?>
-									</td>
-									<td style="text-align: center; vertical-align: middle">
-										<a href="{{ url('/carts/delete/'.$value->product_id) }}" data-sp-ma="2" class="btn btn-danger ">
-											<i class="fa fa-trash" aria-hidden="true"></i> Xóa
-										</a>
-									</td>
-								</tr>
-						<?php
-							}
-						}
-						?>
-					</tbody>
-				</table>
-				<div class="row">
-					<div class="col-md-6 text-left">
-						<a href="{{ url('/') }}" class="btn btn-warning btn-md"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back</a>
-						<a href="{{ url('/checkout') }}" class="btn btn-primary btn-md"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Checkout</a>
-					</div>
-					<div class="col-md-6 text-right" >
-						<h3>Total payment: <strong style="color: crimson">{{ number_format($total).' đ' }}</strong></3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End block content -->
+									</div>
+									<!-- End block content -->
 </main>
 
 @endsection

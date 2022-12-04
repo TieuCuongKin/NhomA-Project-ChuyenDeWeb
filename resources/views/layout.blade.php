@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Electro - HTML Ecommerce Template</title>
+	<title>Website Find Job </title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -18,13 +18,13 @@
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/slick.css') }}" />
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/slick-theme.css') }}" />
-
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/css.css') }}" />
 	<!-- nouislider -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}" />
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-
+   
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
@@ -41,6 +41,7 @@
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
+		
 		<div id="top-header">
 			<div class="container">
 				<ul class="header-links pull-left">
@@ -51,9 +52,9 @@
 				<ul class="header-links pull-right">
 					<?php if ($user != NULL) {
 						if ($user->name == "admin") { ?>
-							<li><a href="{{ url('/admin') }}"><i class="fa fa-user-o"></i>User {{ $user->name }}</a></li>
+							<li><a href="{{ url('/admin') }}"><i class="fa fa-user-o"></i>User {{ $user->email }}</a></li>
 						<?php } else { ?>
-							<li><a href="{{ url('/') }}"><i class="fa fa-user-o"></i>User {{ $user->name }}</a></li>
+							<li><a href="{{ url('/') }}"><i class="fa fa-user-o"></i>User {{ $user->email }}</a></li>
 						<?php } ?>
 						<li>
 							<form method="POST" action="{{ route('logout') }}">
@@ -66,6 +67,7 @@
 					<?php } ?>
 				</ul>
 			</div>
+			
 		</div>
 		<!-- /TOP HEADER -->
 
@@ -79,20 +81,21 @@
 					<div class="col-md-2">
 						<div class="header-logo">
 							<a href="{{ url('/') }}" class="logo">
-								<img src="{{ asset('/img/logo.png') }}" alt="">
+								<h2> JOBIT</h2>
 							</a>
 						</div>
 					</div>
 					<!-- /LOGO -->
 
 					<!-- SEARCH BAR -->
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<div class="header-search">
 							<form method="GET" action="{{ url('/search') }}">
 								<select class="input-select" name="option">
 									<option value="description">Description </option>
-									<option value="product_name">Product name</option>
-									<option value="manu_name">Manufacturers</option>
+									<option value="product_name">Name</option>
+									<option value="company_name">Company</option>
+									<option value="alls">Alls</option>
 								</select>
 								<input name="key" class="input" placeholder="Search here">
 								<button class="search-btn">Search</button>
@@ -102,7 +105,7 @@
 					<!-- /SEARCH BAR -->
 
 					<!-- ACCOUNT -->
-					<div class="col-md-4 clearfix">
+					<div class="col-md-2 clearfix">
 						<div class="header-ctn">
 							<?php if ($user != NULL) { ?>
 								<!-- Wishlist -->
@@ -118,115 +121,17 @@
 								<!-- /Wishlist -->
 
 								<!-- PayMents -->
-								<div class="dropdown">
-									<a href="{{ url('/payments') }}">
-										<i class="fa fa-heart-o"></i>
-										<span>Payments</span>
-										<div class="qty">
-											{{ count($allpayments); }}
-										</div>
-									</a>
-								</div>
-								<!-- /PayMents -->
+
 							<?php } ?>
 
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-									<i class="fa fa-shopping-cart"></i>
-									<span>Your Cart</span>
-									<div class="qty">
-										<?php
-										$total = 0;
-										foreach ($allproducts as $value) {
-											if (session()->has('carts' . $value->product_id)) {
-												$total++;
-											}
-										}
-										echo $total; ?>
-									</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<?php $sum = 0;
-										foreach ($allproducts as $value) {
-											if (session()->has('carts' . $value->product_id)) { ?>
-												<div class="product-widget">
-													<div class="product-img">
-														<a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
-													</div>
-													<div class="product-body">
-														<h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">{{ $value->product_name }}</a></h3>
-														<h4 class="product-price"><span class="qty">{{ session()->get('carts' . $value->product_id) }} x</span>
-															<?php if ($value->sale > 0) {
-																$sum += ($value->price - ($value->price * $value->sale / 100)) * session()->get('carts' . $value->product_id);
-																echo number_format($value->price - ($value->price * $value->sale / 100)) . "đ ";
-															} else {
-																$sum += $value->price * session()->get('carts' . $value->product_id);
-																echo number_format($value->price) . "đ";
-															} ?>
-														</h4>
-													</div>
-													<a href="{{ url('/carts/delete/'.$value->product_id) }}" class="delete">
-														<i class="fa fa-close"></i>
-													</a>
-												</div>
-										<?php }
-										} ?>
-									</div>
-									<div class="cart-summary">
-										<small>{{ $total }} Item(s) selected</small>
-										<h5>SUBTOTAL: {{ number_format($sum) . "đ" }}</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="{{ url('/carts') }}">View Cart</a>
-										<a href="{{ url('/checkout') }}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<!-- /Cart -->
 
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#">
-									<i class="fa fa-bars"></i>
-									<span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
+							<!-- container -->
 						</div>
-					</div>
-					<!-- /ACCOUNT -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
+						<!-- /MAIN HEADER -->
 	</header>
 	<!-- /HEADER -->
 
-	<!-- NAVIGATION -->
-	<nav id="navigation">
-		<!-- container -->
-		<div class="container">
-			<!-- responsive-nav -->
-			<div id="responsive-nav">
-				<!-- NAV -->
-				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="{{ url('/') }}">Home</a></li>
-					<li><a href="{{ url('/search?option=alls') }}">Alls</a></li>
-					@foreach($allmanus as $value)
-					<li><a href="{{ url('/search?option=manu_name&key='.$value->manu_name) }}">{{ $value->manu_name }}</a></li>
-					@endforeach
-				</ul>
-				<!-- /NAV -->
-			</div>
-			<!-- /responsive-nav -->
-		</div>
-		<!-- /container -->
-	</nav>
-	<!-- /NAVIGATION -->
+
 
 	@yield('main-content')
 
@@ -290,9 +195,9 @@
 						<div class="footer">
 							<h3 class="footer-title">Categories</h3>
 							<ul class="footer-links">
-								@foreach($allmanus as $value)
-								<li><a href="{{ url('/store/'.$value->manu_id) }}">{{ $value->manu_name }}</a></li>
-								@endforeach
+							<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+								<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -361,6 +266,13 @@
 		<!-- /bottom footer -->
 	</footer>
 	<!-- /FOOTER -->
+ <!-- JavaScript Libraries -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
 	<!-- jQuery Plugins -->
 	<script src="{{ asset('js/jquery.min.js') }}"></script>

@@ -21,16 +21,6 @@ use App\Http\Controllers\PaymentsController;
 
 require __DIR__ . '/auth.php';
 
-Route::middleware(['auth'])->group(function () {
-    // Admin
-    Route::get('/admin', [MyController::class, 'admin']);
-    Route::resource('/product', ProductsController::class);
-    Route::resource('/manufacturer', ManufacturersController::class);
-    Route::resource('/payment', PaymentsController::class);
-    Route::resource('/detail', DetailsController::class);
-    Route::resource('/other', OthersController::class);
-});
-
 Route::get('/mail', [MyController::class, 'mail']); 
 Route::get('/createpayment', [MyController::class, 'createpayment']); 
 Route::get('/payments', [MyController::class, 'payments']); 
@@ -40,6 +30,6 @@ Route::get('/search', [MyController::class, 'search']);
 Route::get('/others/clearcompare', [MyController::class, 'clearcompare']);
 Route::get('/others/{name}/{product_id}/{user_id}/{option?}/{key?}', [MyController::class, 'others'])->name('others');
 Route::get('/carts/{action?}/{product_id?}', [MyController::class, 'carts'])->name('carts');
-Route::get('/star/{manu_id}/{product_id}/{user_id}', [MyController::class, 'star']);
-Route::get('/products/{product_id}/{manu_id}', [MyController::class, 'products'])->name('products');
+Route::get('/star/{product_id}/{user_id}', [MyController::class, 'star']);
+Route::get('/products/{product_id}', [MyController::class, 'products'])->name('products');
 Route::get('/{name?}', [MyController::class, 'index'])->name('index');

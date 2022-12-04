@@ -29,131 +29,47 @@
 		<div class="row">
 
 			<!-- ASIDE -->
-			<div id="aside" class="col-md-3">
+			<div id="aside" class="col-md-2">
 				<form action="{{ url('/searchoption/'.session()->get('option').'/'.session()->get('key')) }}" method="get">
 					<!-- aside Widget -->
 					<div class="aside">
-						<h3 class="aside-title">Brand</h3>
+						<h3 class="aside-title">Company</h3>
 						<div class="checkbox-filter">
 							<?php foreach ($allmanus as $value) {
 								$summanu = 0;
 								foreach ($allsearchs as $s) {
-									if ($s->manu_id == $value->manu_id) {
+									if ($s->company_name == $value->company_name) {
 										$summanu++;
 									}
 								} ?>
 								<div class="input-checkbox">
-									<input type="checkbox" name="check[]" value="{{ $value->manu_id }}" id="category-{{ $value->manu_id }}">
-									<label for="category-{{ $value->manu_id }}">
+									<input type="checkbox" name="check[]" value="{{ $value->company_name }}" id="category-{{ $value->company_name }}">
+									<label for="category-{{ $value->company_name }}">
 										<span></span>
-										{{ $value->manu_name }}
+										{{ $value->company_name }}
 										<small>{{ $summanu }}</small>
 									</label>
 								</div>
 							<?php } ?>
 						</div>
 					</div>
-					<!-- /aside Widget -->
-
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Price</h3>
-						<div class="price-filter">
-							<div id="price-slider"></div>
-							<div class="input-number price-min">
-								<input id="price-min" type="number" name="min">
-								<span class="qty-up">+</span>
-								<span class="qty-down">-</span>
-							</div>
-							<span>-</span>
-							<div class="input-number price-max">
-								<input id="price-max" type="number" name="max">
-								<span class="qty-up">+</span>
-								<span class="qty-down">-</span>
-							</div>
-						</div>
-					</div>
-					<!-- /aside Widget -->
-					<div style="padding: 20px 0;">
-						<input style="font-weight: 100; width: 260px;" class="add-to-cart-btn" type="submit" value="Search" name="search">
-					</div>
-				</form>
-
-				<!-- aside Widget -->
-				<div class="aside">
-					<h3 class="aside-title">Top selling</h3>
-					@foreach($topsellings as $value)
-					<div class="product-widget">
-						<div class="product-img">
-							<a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
-						</div>
-						<div class="product-body">
-							<p class="product-category">{{ $value->manufacturers->manu_name }}</p>
-							<h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">{{ $value->product_name }}</a></h3>
-							<?php if ($value->sale > 0) { ?>
-								<h4 class="product-price">{{ number_format($value->price - ($value->price * $value->sale / 100)) . "đ " }}<del class="product-old-price">{{ number_format($value->price)."đ" }}</del></h4>
-							<?php } else { ?>
-								<h4 class="product-price">{{ number_format($value->price)."đ" }}</h4>
-							<?php } ?>
-						</div>
-					</div>
-					@endforeach
-				</div>
-				<!-- /aside Widget -->
 			</div>
 			<!-- /ASIDE -->
-
 			<!-- STORE -->
 			<div id="store" class="col-md-9">
-				<!-- store top filter -->
-				<div class="store-filter clearfix">
-					<div class="store-sort">
-						<label>
-							<form action="{{ url('/sort/'.session()->get('option').'/'.session()->get('key')) }}" method="get">
-								Sort By The Money:
-								<select class="input-select" name="sort">
-									<option value="asc">Small -> large</option>
-									<option value="desc">Large -> small</option>
-								</select>
-								<input type="submit" value="Sort">
-							</form>
-						</label>
-					</div>
-					<ul class="store-grid">
-						<li class="active"><i class="fa fa-th"></i></li>
-						<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-					</ul>
-				</div>
-				<!-- /store top filter -->
-
-				<!--store products-->
+			<div class="store-filter clearfix">
 				<!-- /product -->
 				<div class="row">
 					@foreach($search as $value)
 					<!-- product -->
-					<div class="col-md-4 col-xs-6">
+					<div class="col-md-4 col-xs-3">
 						<div class="product">
 							<div class="product-img">
-								<a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
-								<?php if ($value->sale > 0) { ?>
-									<div class="product-label">
-										<span class="sale">{{ "-".$value->sale."%" }}</span>
-										<span class="new">NEW</span>
-									</div>
-								<?php } else { ?>
-									<div class="product-label">
-										<span class="new">NEW</span>
-									</div>
-								<?php } ?>
+								<a href="{{ url('/products/'.$value->product_id.'/'.$value->id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
 							</div>
 							<div class="product-body">
-								<p class="product-category">{{ $value->manufacturers->manu_name }}</p>
-								<h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">{{ $value->product_name }}</a></h3>
-								<?php if ($value->sale > 0) { ?>
-									<h4 class="product-price">{{ number_format($value->price - ($value->price * $value->sale / 100)) . "đ " }}<del class="product-old-price">{{ number_format($value->price)."đ" }}</del></h4>
-								<?php } else { ?>
-									<h4 class="product-price">{{ number_format($value->price)."đ" }}</h4>
-								<?php } ?>
+								<p class="product-category">{{ $value->company_name }}</p>
+								<h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->id) }}">{{ $value->product_name }}</a></h3>
 								<div class="product-rating">
 									<?php for ($i = 0; $i < 5; $i++) {
 										if ($i < $value->star) { ?>
@@ -200,11 +116,12 @@
 							</div>
 							<div class="add-to-cart">
 								<a href="{{ url('/carts/add/'.$value->product_id) }}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									<button class="add-to-cart-btn"><i class="fa-solid fa-file"></i> Apply Jobs</button>
 								</a>
 							</div>
 						</div>
 					</div>
+					
 					<!-- /product -->
 					@endforeach
 				</div>

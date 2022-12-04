@@ -39,15 +39,13 @@
                             <div class="col-md-6 col-xs-6">
                                 <div class="product">
                                     <div class="product-img">
-                                        <a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>
+                                        <a href="{{ url('/products/'.$value->product_id.'/'.$value->company_name) }}"><img src="{{ asset('img/'.$value->image) }}" alt=""></a>{{ $value->company_name }}
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->manu_id) }}">{{ $value->product_name }}</a></h3>
+                                        <h3 class="product-name"><a href="{{ url('/products/'.$value->product_id.'/'.$value->company_name) }}">{{ $value->product_name }}</a></h3>
                                         <?php if ($value->sale > 0) { ?>
-                                            <h4 class="product-price">{{ number_format($value->price - ($value->price * $value->sale / 100)) . "đ " }}<del class="product-old-price">{{ number_format($value->price)."đ" }}</del></h4>
                                         <?php } else { ?>
-                                            <h4 class="product-price">{{ number_format($value->price)."đ" }}</h4>
                                         <?php } ?>
                                         <div class="product-rating">
                                             <?php for ($i = 0; $i < 5; $i++) {

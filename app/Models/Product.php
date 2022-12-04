@@ -17,8 +17,8 @@ class Product extends Model
     {   
         return $this->hasMany(Other::class, 'product_id');
     }
-    public function manufacturers()
+    public function company()
     {
-        return $this->belongsTo(Manufacturer::class, 'manu_id');
+        return $this->belongsTo(Company::class, 'company_name');
     }
 }
